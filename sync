@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-
-set -x
+line='.........................'
+DONE='done'
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ln -sf "$DIR/.bashrc" ~/.bashrc 
-ln -sf "$DIR/.bashrc" ~/.bash_profile
+
+for f in $(ls -a $DIR | grep '^\.[a-zA-Z0-9]\{2,\}')
+do
+  printf "Linking %s %s done.\n" $f "${line:${#f}}" 
+done

@@ -24,10 +24,6 @@ do
     shift
 done
 
-_source() {
-    source $1
-}
-
 
 _sync_folder() {
     SRC_DIR=$1
@@ -54,12 +50,9 @@ _sync() {
 }
 
 
-_sync .reload
 _sync .bashrc
 _sync .bashrc .bash_profile
 _sync .emacs
 _sync .vimrc
 _sync .vim
 _sync .tmux.conf
-
-_source .reload

@@ -39,9 +39,9 @@ _sync_file() {
     SRC=$1
     DEST=${2:-$SRC}
     
-    printf "Linking $SRC to ~/$DEST" 
+    # printf "Linking $SRC to ~/$DEST" 
     rsync -avzq $SRC ~/$DEST
-    printf " done.\n"
+    # printf " done.\n"
 }
 
 _sync() {
@@ -54,6 +54,7 @@ _sync() {
 }
 
 
+_sync .reload
 _sync .bashrc
 _sync .bashrc .bash_profile
 _sync .emacs
@@ -61,4 +62,4 @@ _sync .vimrc
 _sync .vim
 _sync .tmux.conf
 
-_source .bashrc
+_source .reload

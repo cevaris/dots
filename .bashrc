@@ -1,14 +1,13 @@
+# Reload the shell
 function reload {
     source ~/.bash_profile 2> /dev/null
-    echo ".....reloaded shell"
+    tmux source-file ~/.tmux.conf 2> /dev/null
 }
 
 alias ll='ls -la'
-alias tms='tmux attach || tmux new'
 
-em() { emacs $1; } 
-
+# (current_directory)[HH:MM:SS]$
 PS1="(\w)[\t]\$ "
 
+# Load local dot files under .local
 source ~/.local 2> /dev/null
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

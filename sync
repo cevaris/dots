@@ -30,22 +30,24 @@ _source() {
 
 
 _sync_folder() {
-    echo "Syncing folder $1"
+    # echo "Syncing folder $1"
     SRC_DIR=$1
 
-    _sync_file $SRC_DIR
+    # _sync_file $SRC_DIR
 
-    for f in $(find $SRC_DIR/*); do
-        if [ -d $f ]; then
-            _sync_folder $f
-        elif [ -f $f ]; then
-            _sync_file $f
-        fi
-    done
+    rsync -rvzq "$SRC_DIR/" ~/
+
+    # for f in $(find $SRC_DIR/*); do
+    #     if [ -d $f ]; then
+    #         _sync_folder $f
+    #     elif [ -f $f ]; then
+    #         _sync_file $f
+    #     fi
+    # done
 }
 
 _sync_file() {
-    echo "Syncing file $1 $2"
+    # echo "Syncing file $1 $2"
 
     # Assign args
     SRC=$1
@@ -53,21 +55,22 @@ _sync_file() {
 
     printf "Linking %s %s" $f "${PAD:${#f}}"
     if [ -z "$DEST" ]; then
-        ln -fs $DIR/$SRC ~/$SRC
+        rsync -avzq $SRC ~/
     else
-        ln -fs $DIR/$SRC ~/$DEST
+        rsync -avzq $SRC ~/$DEST
     fi
     printf " done.\n"
 }
 
 _sync() {
 
-    # Sync file
+    # # Sync file
     if [ -d $1 ]; then
         _sync_folder $1 $2
     elif [ -f $1 ]; then
         _sync_file $1 $2
     fi
+
     
 }
 
@@ -83,8 +86,8 @@ _sync() {
 # done
 
 
-# _sync .bashrc
-# _sync .bashrc .bash_profile
+_sync .bashrc
+_sync .bashrc .bash_profile
 # _sync .emacs
 _sync .vim
 

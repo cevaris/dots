@@ -1,7 +1,7 @@
 # Reload the shell
 function reload {
-    source ~/.bash_profile 2> /dev/null
-    tmux source-file ~/.tmux.conf 2> /dev/null
+    source ~/.bash_profile > /dev/null 2>&1
+    tmux source-file ~/.tmux.conf > /dev/null 2>&1
 }
 
 alias ll='ls -la'

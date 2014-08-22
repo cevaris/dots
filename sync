@@ -31,7 +31,7 @@ _source() {
 
 _sync_folder() {
     SRC_DIR=$1
-    rsync -rvzq "$SRC_DIR/" ~/
+    rsync -rvzq $SRC_DIR ~/
 }
 
 _sync_file() {

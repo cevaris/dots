@@ -1,4 +1,0 @@
-dots
-====
-
-Dotfiles for sharing

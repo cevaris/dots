@@ -72,7 +72,3 @@ export WORKON_HOME=~/.envs
 #Load local dot files under .local
 source ~/.local 2> /dev/null
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/check_jmx:/usr/local/cassandra/bin/:/usr/local/play-2.0/:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/etcd/bin:/usr/local/heroku/bin:/usr/local/rabbitmq_server/sbin:$PATH"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

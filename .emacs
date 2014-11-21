@@ -7,6 +7,11 @@
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
 
+;; Line numbers
+;; (global-linum-mode t)
+;; (setq linum-format "%d "k)
+
+
 ;; auto-complete
 (add-to-list 'load-path "/Users/adamc/.emacs.d/auto-complete")
 (require 'auto-complete-config)
@@ -16,5 +21,7 @@
 ;;(require 'ctags)
 
 ;; hasekll-mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode) 
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'interactive-haskell-mode) 

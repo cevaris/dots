@@ -1,7 +1,28 @@
 #!/usr/bin/env zsh
 
+############################################################
+# ZSH settings #############################################
+
 autoload -U colors && colors
 PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
+# Delete key
+bindkey    "^[[3~"          delete-char
+bindkey    "^[3;5~"         delete-char
+
+export HISTSIZE=100000
+export HISTFILE="$HOME/.history"
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+
+# CD without typing it
+setopt autocd
+# Enables the following cp ^*.(tar|bz2|gz) . 
+setopt extendedglob
+# Autocomplete
+autoload predict-on
+predict-on
+
+############################################################
 
 # Reload the shell
 reload() {
@@ -43,20 +64,6 @@ function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
 setjdk 1.7
-
-# Delete key
-bindkey    "^[[3~"          delete-char
-bindkey    "^[3;5~"         delete-char
-
-export HISTSIZE=100000
-export HISTFILE="$HOME/.history"
-export SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups
-
-# CD without typing it
-setopt autocd
-# Enables the following cp ^*.(tar|bz2|gz) . 
-setopt extendedglob
 
 # JAVA_ARGS="${JAVA_ARGS} -Xms1024M -Xmx2048M -XX:PermSize=256m -XX:MaxPermSize=512m"
 JAVA_ARGS="-Xms1024M -Xmx2048M -XX:PermSize=256m -XX:MaxPermSize=512m"

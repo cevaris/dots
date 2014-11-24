@@ -19,8 +19,8 @@ setopt autocd
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
 # Autocomplete
-autoload predict-on
-predict-on
+#autoload predict-on
+#predict-on
 
 ############################################################
 
@@ -73,8 +73,9 @@ export JAVA_ARGS
 export SBT_OPTS
 export JRUBY_OPTS
 
-
+# Python virtualenv
 export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
 
 #Load local dot files under .local
 source ~/.local 2> /dev/null

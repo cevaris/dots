@@ -9,6 +9,10 @@ PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
+
+# Make emacs default git editor
+export GIT_EDITOR=emacs
+
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE

@@ -22,32 +22,37 @@ setopt extendedglob
 #autoload predict-on
 #predict-on
 
+
 ############################################################
+
+
+# Aliases
+alias ll='ls -la'
+alias e='emacs'
+
+
+############################################################
+
 
 # Reload the shell
 reload() {
 
     if [[ -f ~/.bash_profile ]] ; then
-        #source ~/.bash_profile > /dev/null 2>&1
-       source ~/.zshrc
+	source ~/.zshrc
+	echo "zsh reloaded."
     fi
 
-    if [[ -f ~/.tmux.conf ]] ; then
-        #tmux source-file ~/.tmux.conf > /dev/null 2>&1
-    fi
 }
 
+# Search with line numbers :)
 search() {
-    grep -rnw $(pwd) -e $1
+    grep -inrw $(pwd) -e $1
 }
 
+# Validation of puppet recursively
 ppv() {
     puppet parser validate $(find /git/puppet -name "*.pp")
 }
-
-# Aliases
-alias ll='ls -la'
-alias e='emacs'
 
 # Java 
 function setjdk() {
@@ -65,17 +70,23 @@ function removeFromPath() {
 }
 setjdk 1.7
 
-# JAVA_ARGS="${JAVA_ARGS} -Xms1024M -Xmx2048M -XX:PermSize=256m -XX:MaxPermSize=512m"
-JAVA_ARGS="-Xms1024M -Xmx2048M -XX:PermSize=256m -XX:MaxPermSize=512m"
-SBT_OPTS="${JAVA_ARGS}"
-JRUBY_OPTS="-Xms1024M -Xmx2048M -Xcext.enabled=true"
-export JAVA_ARGS
-export SBT_OPTS
-export JRUBY_OPTS
+# General Path Helper
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+	PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
 
 # Python virtualenv
 export WORKON_HOME=~/.envs
 source /usr/local/bin/virtualenvwrapper.sh
+
+# Go dev
+function gopath(){
+    export GOPATH=$(pwd)
+    echo GOPATH=$GOPATH
+    pathadd $GOPATH/bni0
+}
 
 #Load local dot files under .local
 source ~/.local 2> /dev/null

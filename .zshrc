@@ -23,8 +23,7 @@ setopt autocd
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
 # Autocomplete
-#autoload predict-on
-#predict-on
+source ~/.zsh.d/completion.zsh
 
 
 ############################################################

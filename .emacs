@@ -32,3 +32,11 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Go Mode indention
+(add-hook 'go-mode-hook
+	  (lambda ()
+	    (setq-default)
+	    (setq tab-width 4)
+	    (setq standard-indent 4)
+	    (setq indent-tabs-mode 1)))

@@ -1,5 +1,17 @@
 *
+
 !.tmux.conf
-!.zshrc
 !.emacs
 !.vimrc
+
+# ZSH
+!.zshrc
+!.zsh.d*
+!.zsh.d/*
+
+
+!.gitignore
+
+# Emacs autosave
+*[#]*[#]
+*[#]*

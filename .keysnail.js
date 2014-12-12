@@ -13,8 +13,8 @@
 key.quitKey              = "C-g";
 key.helpKey              = "<f1>";
 key.escapeKey            = "C-q";
-key.macroStartKey        = "undefined";
-key.macroEndKey          = "undefined";
+key.macroStartKey        = "<f3>";
+key.macroEndKey          = "<f4>";
 key.suspendKey           = "<f2>";
 key.universalArgumentKey = "C-u";
 key.negativeArgument1Key = "C--";
@@ -66,6 +66,10 @@ key.setGlobalKey('M-x', function (ev, arg) {
                 ext.select(arg, ev);
             }, 'List exts and execute selected one', true);
 
+key.setGlobalKey('M-:', function (ev) {
+                command.interpreter();
+            }, 'Command interpreter', true);
+
 key.setGlobalKey(["<f1>", "b"], function (ev) {
                 key.listKeyBindings();
             }, 'List all keybindings', false);
@@ -94,6 +98,10 @@ key.setGlobalKey(["C-x", "s"], function (ev) {
                 command.focusElement(command.elementsRetrieverButton, 0);
             }, 'Focus to the first button', true);
 
+key.setGlobalKey('M-w', function (ev) {
+                command.copyRegion(ev);
+            }, 'Copy selected text', true);
+
 key.setGlobalKey('C-s', function (ev) {
                 command.iSearchForwardKs(ev);
             }, 'Emacs like incremental search forward', true);
@@ -117,10 +125,6 @@ key.setGlobalKey(["C-c", "u"], function (ev) {
 key.setGlobalKey(["C-x", "n"], function (ev) {
                 OpenBrowserWindow();
             }, 'Open new window', false);
-
-key.setGlobalKey("C-t", function () {
-                document.getElementById("cmd_newNavigatorTab").doCommand();
-            }, "Open the new tab");
 
 key.setGlobalKey('C-M-l', function (ev) {
                 getBrowser().mTabContainer.advanceSelectedTab(1, true);
@@ -162,7 +166,7 @@ key.setEditKey(["C-x", "h"], function (ev) {
                 command.selectAll(ev);
             }, 'Select whole text', true);
 
-key.setEditKey([["C-`"], ["C-@"]], function (ev) {
+key.setEditKey([["C-SPC"], ["C-@"]], function (ev) {
                 command.setMark(ev);
             }, 'Set the mark', true);
 
@@ -196,6 +200,14 @@ key.setEditKey('C-b', function (ev) {
                 command.previousChar(ev);
             }, 'Backward char', false);
 
+key.setEditKey('M-f', function (ev) {
+                command.forwardWord(ev);
+            }, 'Next word', false);
+
+key.setEditKey('M-b', function (ev) {
+                command.backwardWord(ev);
+            }, 'Previous word', false);
+
 key.setEditKey('C-n', function (ev) {
                 command.nextLine(ev);
             }, 'Next line', false);
@@ -207,6 +219,10 @@ key.setEditKey('C-p', function (ev) {
 key.setEditKey('C-v', function (ev) {
                 command.pageDown(ev);
             }, 'Page down', false);
+
+key.setEditKey('M-v', function (ev) {
+                command.pageUp(ev);
+            }, 'Page up', false);
 
 key.setEditKey('M-<', function (ev) {
                 command.moveTop(ev);
@@ -224,9 +240,25 @@ key.setEditKey('C-h', function (ev) {
                 goDoCommand("cmd_deleteCharBackward");
             }, 'Delete backward char', false);
 
+key.setEditKey('M-d', function (ev) {
+                command.deleteForwardWord(ev);
+            }, 'Delete forward word', false);
+
 key.setEditKey([["C-<backspace>"], ["M-<delete>"]], function (ev) {
                 command.deleteBackwardWord(ev);
             }, 'Delete backward word', false);
+
+key.setEditKey('M-u', function (ev, arg) {
+                command.wordCommand(ev, arg, command.upcaseForwardWord, command.upcaseBackwardWord);
+            }, 'Convert following word to upper case', false);
+
+key.setEditKey('M-l', function (ev, arg) {
+                command.wordCommand(ev, arg, command.downcaseForwardWord, command.downcaseBackwardWord);
+            }, 'Convert following word to lower case', false);
+
+key.setEditKey('M-c', function (ev, arg) {
+                command.wordCommand(ev, arg, command.capitalizeForwardWord, command.capitalizeBackwardWord);
+            }, 'Capitalize the following word', false);
 
 key.setEditKey('C-k', function (ev) {
                 command.killLine(ev);
@@ -280,6 +312,14 @@ key.setEditKey(["C-x", "r", "k"], function (ev, arg) {
 key.setEditKey(["C-x", "r", "y"], function (ev) {
                 command.yankRectangle(ev.originalTarget, command.kill.buffer);
             }, 'Yank the last killed rectangle with upper left corner at point', true);
+
+key.setEditKey('M-n', function (ev) {
+                command.walkInputElement(command.elementsRetrieverTextarea, true, true);
+            }, 'Focus to the next text area', false);
+
+key.setEditKey('M-p', function (ev) {
+                command.walkInputElement(command.elementsRetrieverTextarea, false, true);
+            }, 'Focus to the previous text area', false);
 
 key.setViewKey([["C-n"], ["j"]], function (ev) {
                 key.generateKey(ev.originalTarget, KeyEvent.DOM_VK_DOWN, true);
@@ -423,7 +463,7 @@ key.setCaretKey('z', function (ev) {
                 command.recenter(ev);
             }, 'Scroll to the cursor position', false);
 
-key.setCaretKey([["C-`"], ["C-@"]], function (ev) {
+key.setCaretKey([["C-SPC"], ["C-@"]], function (ev) {
                 command.setMark(ev);
             }, 'Set the mark', true);
 
@@ -459,3 +499,8 @@ key.setCaretKey('M-n', function (ev) {
                 command.walkInputElement(command.elementsRetrieverButton, false, true);
             }, 'Focus to the previous button', false);
 
+// ============================= Misc ============================== //
+
+key.setGlobalKey("C-t", function () {
+    document.getElementById("cmd_newNavigatorTab").doCommand();
+}, "Open the new tab");

@@ -4,6 +4,9 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
+;; Projectile
+(projectile-global-mode)
+
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
 
@@ -20,18 +23,25 @@
 ;; ctags
 ;;(require 'ctags)
 
+;; Structured Haskell Mode
+;; (add-to-list 'load-path "/Users/adamc/.emacs.d/structured-haskell-mode/elisp")
+;; (require 'shm)
+;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+;; (set-face-background 'shm-current-face "#eee8d5")
+;; (set-face-background 'shm-quarantine-face "lemonchiffon")
+
 ;; hasekll-mode
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;;(add-hook 'haskell-mode-hook 'interactive-haskell-mode) 
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 ;; Multiple Cursors
 (require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; Go Mode indention
 (add-hook 'go-mode-hook
@@ -40,3 +50,4 @@
 	    (setq tab-width 4)
 	    (setq standard-indent 4)
 	    (setq indent-tabs-mode 1)))
+

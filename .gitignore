@@ -3,6 +3,7 @@
 !.tmux.conf
 !.emacs
 !.vimrc
+!.keysnail.js
 
 # ZSH
 !.zshrc

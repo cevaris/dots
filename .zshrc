@@ -12,6 +12,7 @@ bindkey    "^[3;5~"         delete-char
 
 # Make emacs default git editor
 export GIT_EDITOR=emacs
+#export EDITOR=emacs
 
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
@@ -22,9 +23,8 @@ setopt hist_ignore_all_dups
 setopt autocd
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
-# Autocomplete
+# Completion
 source ~/.zsh.d/completion.zsh
-
 
 ############################################################
 
@@ -88,7 +88,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 function gopath(){
     export GOPATH=$(pwd)
     echo GOPATH=$GOPATH
-    pathadd $GOPATH/bni0
+    export GOBIN=$GOPATH/bin
+    echo GOBIN=$GOBIN
 }
 
 #Load local dot files under .local

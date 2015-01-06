@@ -3,8 +3,12 @@
 ############################################################
 # ZSH settings #############################################
 
-autoload -U colors && colors
+# Prompt
 PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
+
+# Colors
+autoload -U colors && colors
+
 # Delete key
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
@@ -30,6 +34,7 @@ source ~/.zsh.d/completion.zsh
 
 
 # Aliases
+# alias ls='ls -G'
 alias ll='ls -la'
 alias e='emacs'
 
@@ -74,7 +79,7 @@ function removeFromPath() {
 setjdk 1.7
 
 # General Path Helper
-pathadd() {
+function pathAdd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
 	PATH="${PATH:+"$PATH:"}$1"
     fi
@@ -90,8 +95,9 @@ function gopath(){
     echo GOPATH=$GOPATH
     export GOBIN=$GOPATH/bin
     echo GOBIN=$GOBIN
+    pathAdd $GOBIN
 }
 
 #Load local dot files under .local
-source ~/.local 2> /dev/null
+source ~/.shell-local 2> /dev/null
 

@@ -51,3 +51,7 @@
 	    (setq standard-indent 4)
 	    (setq indent-tabs-mode 1)))
 
+;; Puppet indention
+(defcustom puppet-indent-level 4
+  "*Indentation of Puppet statements."
+    :type 'integer :group 'puppet)

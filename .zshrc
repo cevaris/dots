@@ -29,15 +29,20 @@ setopt autocd
 setopt extendedglob
 # Completion
 source ~/.zsh.d/completion.zsh
+# Host completion
+local knownhosts
+knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
 
 ############################################################
 
 
 # Aliases
 # alias ls='ls -G'
+alias l='less'
 alias ll='ls -la'
 alias e='emacs'
-
+alias updatedb='/usr/libexec/locate.updatedb'
 
 ############################################################
 
@@ -81,7 +86,7 @@ setjdk 1.7
 # General Path Helper
 function pathAdd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-	PATH="${PATH:+"$PATH:"}$1"
+	export PATH="${PATH:+"$PATH:"}$1"
     fi
 }
 
@@ -91,13 +96,31 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # Go dev
 function gopath(){
-    export GOPATH=$(pwd)
-    echo GOPATH=$GOPATH
+    export GOPATH=/go
+    echo GOPATH=/go
     export GOBIN=$GOPATH/bin
     echo GOBIN=$GOBIN
     pathAdd $GOBIN
 }
 
-#Load local dot files under .local
+function docker-ip() {
+    boot2docker ip 2> /dev/null
+}
+
+function docker-ssh() {
+    docker-setup
+    boot2docker ssh '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
+    args=$@
+    boot2docker ssh -t sudo /var/lib/boot2docker/docker-enter "${args[@]}"
+}
+
+function docker-setup() {
+    boot2docker up
+    export DOCKER_HOST=tcp://$(docker-ip):2376
+    export DOCKER_CERT_PATH=/Users/$USER/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1    
+}
+
+#Load Local dot files under .local
 source ~/.shell-local 2> /dev/null
 

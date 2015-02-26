@@ -5,7 +5,7 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 ;; Projectile
-(projectile-global-mode)
+(projectile-global-mode +1)
 
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
@@ -16,23 +16,12 @@
 
 
 ;; auto-complete
-(add-to-list 'load-path "/Users/adamc/.emacs.d/auto-complete")
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; ctags
-;;(require 'ctags)
-
-;; Structured Haskell Mode
-;; (add-to-list 'load-path "/Users/adamc/.emacs.d/structured-haskell-mode/elisp")
-;; (require 'shm)
-;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
-;; (set-face-background 'shm-current-face "#eee8d5")
-;; (set-face-background 'shm-quarantine-face "lemonchiffon")
 
 ;; hasekll-mode
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
@@ -55,3 +44,39 @@
 (defcustom puppet-indent-level 4
   "*Indentation of Puppet statements."
     :type 'integer :group 'puppet)
+
+;; Ensime for Scala
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+
+;; Python Jedi - Autocomplete
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+(setq-default python-indent 2)
+(setq-default python-guess-indent nil)
+
+
+;; Flymake pep8
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+;; Enable yaml mode
+(require 'yaml-mode)
+
+
+;; enable colume mode
+(setq column-number-mode 1)
+
+
+;; Useless Spaces
+(setq-default show-trailing-whitespace t)
+
+
+;; Window change
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+
+

@@ -4,11 +4,20 @@
 # ZSH settings #############################################
 
 # Extended colors
-export TERM='xterm-256color'
+# export TERM='xterm-256color'
+
+# Git
+source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 
 # Prompt
 # PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
-PS1='$fg[white]%c$(git_super_status) - %{$reset_color%}'
+# PRMOPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+autoload -U add-zsh-hook
+add-zsh-hook chpwd update_prompt
+function update_prompt() {
+    PROMPT="%{$fg[white]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+}
 
 
 # Colors
@@ -33,13 +42,11 @@ setopt autocd
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
 # Completion
-source ~/.zsh.d/completion.zsh
-# Git
-source ~/.zsh.d/zsh-git-prompt/zshrc.sh
+# source ~/.zsh.d/completion.zsh
 # Host completion
-local knownhosts
-knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
+# local knownhosts
+# knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+# zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
 
 ############################################################
 
@@ -57,7 +64,7 @@ alias hd='hexdump -C'
 # Reload the shell
 reload() {
 
-    if [[ -f ~/.bash_profile ]] ; then
+    if [[ -f ~/.zshrc ]] ; then
 	source ~/.zshrc
 	echo "zsh reloaded."
     fi

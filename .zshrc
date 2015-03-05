@@ -3,8 +3,13 @@
 ############################################################
 # ZSH settings #############################################
 
+# Extended colors
+export TERM='xterm-256color'
+
 # Prompt
-PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
+# PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
+PS1='$fg[white]%c$(git_super_status) - %{$reset_color%}'
+
 
 # Colors
 autoload -U colors && colors
@@ -29,6 +34,8 @@ setopt autocd
 setopt extendedglob
 # Completion
 source ~/.zsh.d/completion.zsh
+# Git
+source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 # Host completion
 local knownhosts
 knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
@@ -43,7 +50,7 @@ alias l='less'
 alias ll='ls -la'
 alias e='emacs'
 alias updatedb='/usr/libexec/locate.updatedb'
-
+alias hd='hexdump -C'
 ############################################################
 
 
@@ -120,6 +127,11 @@ function docker-setup() {
     export DOCKER_CERT_PATH=/Users/$USER/.boot2docker/certs/boot2docker-vm
     export DOCKER_TLS_VERIFY=1    
 }
+
+
+
+# Python
+export PYTHONDONTWRITEBYTECODE=1
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null

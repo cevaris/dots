@@ -1,5 +1,9 @@
 *
 
+# Emacs autosave
+*[#]*[#]
+*[#]*
+
 !.tmux.conf
 !.emacs
 !.vimrc
@@ -12,7 +16,3 @@
 
 
 !.gitignore
-
-# Emacs autosave
-*[#]*[#]
-*[#]*

@@ -13,7 +13,7 @@
 ;; Line numbers
 ;; (global-linum-mode t)
 ;; (setq linum-format "%d "k)
-
+(setq require-final-newline 0)
 
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d/auto-complete")

@@ -1,18 +1,4 @@
-*
 
 # Emacs autosave
 *[#]*[#]
 *[#]*
-
-!.tmux.conf
-!.emacs
-!.vimrc
-!.keysnail.js
-
-# ZSH
-!.zshrc
-!.zsh.d*
-!.zsh.d/*
-
-
-!.gitignore

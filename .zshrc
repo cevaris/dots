@@ -14,6 +14,9 @@ source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 # PRMOPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
 function precmd {
     PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+    if ! [ -z "$VIRTUAL_ENV" ]; then
+	PROMPT="(`basename \"$VIRTUAL_ENV\"`)$PROMPT"
+    fi
 }
 
 

@@ -12,11 +12,8 @@ source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 # Prompt
 # PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
 # PRMOPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-autoload -U add-zsh-hook
-add-zsh-hook chpwd update_prompt
-function update_prompt() {
-    PROMPT="%{$fg[white]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+function precmd {
+    PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
 }
 
 

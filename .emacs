@@ -80,3 +80,34 @@
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
 
+;; Copy from Emacs
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
+
+
+;; (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20141223.303")
+;; (require 'yasnippet)
+;; (yas/initialize)
+;; (setq yas/root-directory "~/.emacs.d/elpa/yasnippet-20141223.303")
+;; (yas/load-directory yas/root-directory)
+;; (yas-global-mode 1)
+
+(define-abbrev-table 'global-abbrev-table '(
+					    ("ipdbd" "import ipdb;ipdb.set_trace()")
+					    ))
+;; stop asking whether to save newly added abbrev when quitting emacs
+(setq save-abbrevs nil)
+;; turn on abbrev mode globally
+(setq-default abbrev-mode t)
+
+
+
+
+

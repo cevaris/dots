@@ -70,7 +70,14 @@
 
 
 ;; Useless Spaces
-(setq-default show-trailing-whitespace t)
+(require 'whitespace)
+;; Mode not active by default: let's activate it
+(global-whitespace-mode t)
+(setq whitespace-space 0)
+(setq whitespace-display-mappings
+      '((space-mark ?\ [] []); space
+	(newline-mark ?\n [?\xB7 ?\n] [?. ?\n]); space
+	))
 
 
 ;; Window change
@@ -92,13 +99,6 @@
 (setq interprogram-paste-function 'copy-from-osx)
 
 
-;; (add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-20141223.303")
-;; (require 'yasnippet)
-;; (yas/initialize)
-;; (setq yas/root-directory "~/.emacs.d/elpa/yasnippet-20141223.303")
-;; (yas/load-directory yas/root-directory)
-;; (yas-global-mode 1)
-
 (define-abbrev-table 'global-abbrev-table '(
 					    ("ipdbd" "import ipdb;ipdb.set_trace()")
 					    ))
@@ -108,6 +108,10 @@
 (setq-default abbrev-mode t)
 
 
+;; ispell
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
 
 
 

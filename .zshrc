@@ -55,11 +55,29 @@ setopt extendedglob
 # alias ls='ls -G'
 alias l='less'
 alias ll='ls -la'
+alias rm='rm -i'
 alias e='emacs'
+alias em='emacs .'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias hd='hexdump -C'
 ############################################################
 
+# Sample file
+samplef() {
+    # set -x
+    if [ -z "${1}" ]; then
+	echo 'Error: Missing file path'
+	echo
+	echo 'Usage:'
+	echo 'samplef <FILEPATH> <SAMPLE_SIZE>'
+	echo 
+	echo 'Optional paramters: <SAMPLE_SIZE>, default is 0.1'
+	echo 'ex; samplef ./myfile.txt 0.25'
+	return
+    fi
+    SAMPLE_RATIO=${2:-0.1}
+    cat $1 | perl -n -e "print if (rand() < $SAMPLE_RATIO)"
+}
 
 # Reload the shell
 reload() {
@@ -109,13 +127,11 @@ export WORKON_HOME=~/.envs
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Go dev
-function gopath(){
-    export GOPATH=/go
-    echo GOPATH=/go
-    export GOBIN=$GOPATH/bin
-    echo GOBIN=$GOBIN
-    pathAdd $GOBIN
-}
+alias goplay='cd /go/src/github.com/cevaris'
+export GOPATH=/go
+export GOBIN=$GOPATH/bin
+# export GOROOT=/usr/local/Cellar/go/1.4.1
+pathAdd $GOBIN
 
 function docker-ip() {
     boot2docker ip 2> /dev/null

@@ -76,9 +76,9 @@
 (setq whitespace-space 0)
 (setq whitespace-display-mappings
       '((space-mark ?\ [] []); space
-	(newline-mark ?\n [?\xB7 ?\n] [?. ?\n]); space
-	))
-
+	(newline-mark ?\n [?\u1445 ?\n]); newline
+	)
+)
 
 ;; Window change
 (global-set-key (kbd "C-x <left>") 'windmove-left)

@@ -2,16 +2,13 @@
 
 ############################################################
 # ZSH settings #############################################
-
-# Extended colors
-# export TERM='xterm-256color'
+export ZSH=/Users/adamc/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 
 # Git
 source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 
 # Prompt
-# PS1="%{%(#~$fg[red]~$fg[green])%}%n%{$reset_color%}:%/[%*]$ "
-# PRMOPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
 function precmd {
     PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
     if ! [ -z "$VIRTUAL_ENV" ]; then
@@ -27,7 +24,6 @@ autoload -U colors && colors
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
-
 # Make emacs default git editor
 export GIT_EDITOR=emacs
 #export EDITOR=emacs
@@ -42,24 +38,19 @@ setopt autocd
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
 # Completion
-# source ~/.zsh.d/completion.zsh
-# Host completion
-# local knownhosts
-# knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-# zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
+plugins=(completion)
 
 ############################################################
-
-
 # Aliases
-# alias ls='ls -G'
 alias l='less'
 alias ll='ls -la'
 alias rm='rm -i'
+alias g='git'
 alias e='emacs'
 alias em='emacs .'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias hd='hexdump -C'
+
 ############################################################
 
 # Sample file
@@ -81,12 +72,10 @@ samplef() {
 
 # Reload the shell
 reload() {
-
     if [[ -f ~/.zshrc ]] ; then
 	source ~/.zshrc
 	echo "zsh reloaded."
     fi
-
 }
 
 # Search with line numbers :)
@@ -130,7 +119,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 alias goplay='cd /go/src/github.com/cevaris'
 export GOPATH=/go
 export GOBIN=$GOPATH/bin
-# export GOROOT=/usr/local/Cellar/go/1.4.1
 pathAdd $GOBIN
 
 function docker-ip() {
@@ -151,11 +139,10 @@ function docker-setup() {
     export DOCKER_TLS_VERIFY=1    
 }
 
-
-
 # Python
 export PYTHONDONTWRITEBYTECODE=1
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null
 
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

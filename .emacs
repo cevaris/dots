@@ -76,7 +76,7 @@
 (setq whitespace-space 0)
 (setq whitespace-display-mappings
       '((space-mark ?\ [] []); space
-	(newline-mark ?\n [?\u1445 ?\n]); newline
+	(newline-mark ?\n [?\u00AC ?\n]); newline
 	)
 )
 
@@ -108,10 +108,32 @@
 (setq-default abbrev-mode t)
 
 
+;; smooth scrolling
+;; Top/Botom page scrolling
+(setq auto-save-interval 500)
+(setq scroll-conservatively 10000)
+:; Scoll in place window scrolling
+(defun scroll-down-in-place (n)
+  (interactive "p")
+  (previous-line n)
+  (unless (eq (window-start) (point-min))
+    (scroll-down n)))
+(defun scroll-up-in-place (n)
+  (interactive "p")
+  (next-line n)
+  (unless (eq (window-end) (point-max))
+    (scroll-up n)))
+(global-set-key "\M-n" 'scroll-up-in-place)
+(global-set-key "\M-p" 'scroll-down-in-place)
+
+
+;; matching parantheses
+(show-paren-mode 1)
+
+
 ;; ispell
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
-
 
 

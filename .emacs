@@ -9,7 +9,7 @@
 (transient-mark-mode t)
 ;; Line numbers
 (global-linum-mode t)
-(setq linum-format "%d "k)
+(setq linum-format "%4d\u2502 ")
 (setq require-final-newline 0)
 ;; enable colume mode
 (setq column-number-mode 1)

@@ -5,7 +5,26 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 ;; Projectile
-(projectile-global-mode +1)
+(require 'projectile)
+(projectile-global-mode)
+(helm-projectile-on)
+;; (setq projectile-completion-system 'helm)
+;; (setq projectile-indexing-method 'native)
+;; (setq projectile-globally-ignored-files "")
+;; (setq projectile-globally-ignored-directories "target")
+
+(setq projectile-globally-ignored-directories
+      (append projectile-globally-ignored-directories '(".git"
+							"build"
+							"target"
+							)))
+
+
+;; etags-select
+;; (define-key map (kbd "RET") 'etags-select-goto-tag)
+;; (define-key map (kbd "M-RET") 'etags-select-goto-tag-other-window)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
 
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
@@ -15,11 +34,8 @@
 ;; (setq linum-format "%d "k)
 (setq require-final-newline 0)
 
-;; auto-complete
-(add-to-list 'load-path "~/.emacs.d/auto-complete")
-(require 'auto-complete-config)
+;; Auto complete
 (ac-config-default)
-
 
 ;; hasekll-mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
@@ -46,8 +62,8 @@
     :type 'integer :group 'puppet)
 
 ;; Ensime for Scala
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 
 ;; Python Jedi - Autocomplete
@@ -55,6 +71,14 @@
 (setq jedi:complete-on-dot t)
 (setq-default python-indent 2)
 (setq-default python-guess-indent nil)
+
+
+;; ipdb highlight
+(defun annotate-pdb ()
+  (interactive)
+  (highlight-lines-matching-regexp "import ipdb")
+  (highlight-lines-matching-regexp "ipdb.set_trace()"))
+(add-hook 'python-mode-hook 'annotate-pdb)
 
 
 ;; Flymake pep8
@@ -130,6 +154,8 @@
 ;; matching parantheses
 (show-paren-mode 1)
 
+;; TAGS file is too large
+(setq large-file-warning-threshold nil)
 
 ;; ispell
 (dolist (hook '(text-mode-hook))

@@ -42,16 +42,18 @@ plugins=(completion)
 
 ############################################################
 # Aliases
-alias l='less'
-alias ll='ls -la'
-alias rm='rm -i'
-alias g='git'
 alias e='emacs'
 alias em='emacs .'
-alias updatedb='/usr/libexec/locate.updatedb'
+alias g='git'
 alias hd='hexdump -C'
+alias l='less'
+alias ll='ls -la'
+alias m='man'
+alias rm='rm -i'
+alias updatedb='/usr/libexec/locate.updatedb'
 
-############################################################
+
+############################################################ 
 
 # Sample file
 samplef() {
@@ -68,6 +70,11 @@ samplef() {
     fi
     SAMPLE_RATIO=${2:-0.1}
     cat $1 | perl -n -e "print if (rand() < $SAMPLE_RATIO)"
+}
+
+
+ctags-python(){
+    ctags -e -R . ${$(which python)/\/bin\/python/}
 }
 
 # Reload the shell

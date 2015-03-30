@@ -4,26 +4,43 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
+
+;; Highlight text while in mark mode
+(transient-mark-mode t)
+;; Line numbers
+(global-linum-mode t)
+(setq linum-format "%d "k)
+(setq require-final-newline 0)
+;; enable colume mode
+(setq column-number-mode 1)
+;; stop asking whether to save newly added abbrev when quitting emacs
+(setq save-abbrevs nil)
+;; turn on abbrev mode globally
+(setq-default abbrev-mode t)
+;; matching parantheses
+(show-paren-mode 1)
+;; TAGS file is too large
+(setq large-file-warning-threshold nil)
+
+
 ;; Projectile
 (require 'projectile)
 (projectile-global-mode)
 (helm-projectile-on)
-;; (setq projectile-completion-system 'helm)
-;; (setq projectile-indexing-method 'native)
-;; (setq projectile-globally-ignored-files "")
-;; (setq projectile-globally-ignored-directories "target")
+(setq projectile-completion-system 'helm)
 
-(setq projectile-globally-ignored-directories
-      (append projectile-globally-ignored-directories '(".git"
-							"build"
-							"target"
-							)))
 
+;; Example tag tables linking
+;; (setq tags-table-list
+;;       '("/git/Big-Data"
+;; 	"/git/scala"
+;; 	"/git/scalaz"
+;; 	"/git/scalaz-stream"
+;; 	))
 
 ;; etags-select
 (require 'etags-select)
 (setq etags-select-mode 1)
-
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)
 (define-key etags-select-mode-map (kbd "C-g")   'etags-select-quit)
@@ -34,14 +51,6 @@
 (define-key etags-select-mode-map (kbd "RET") 'etags-select-goto-tag)
 (define-key etags-select-mode-map (kbd "M-RET") 'etags-select-goto-tag-other-window)
 
-;; Highlight text while in mark mode
-(transient-mark-mode t)
-
-;; Line numbers
-;; (global-linum-mode t)
-;; (setq linum-format "%d "k)
-(setq require-final-newline 0)
-
 
 ;; Auto complete
 (ac-config-default)
@@ -50,12 +59,10 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
+
 ;; Multiple Cursors
-(require 'multiple-cursors)
-;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; (require 'multiple-cursors)
+
 
 ;; Go Mode indention
 (add-hook 'go-mode-hook
@@ -65,14 +72,16 @@
 	    (setq standard-indent 4)
 	    (setq indent-tabs-mode 1)))
 
+
 ;; Puppet indention
 (defcustom puppet-indent-level 4
   "*Indentation of Puppet statements."
     :type 'integer :group 'puppet)
 
+
 ;; Ensime for Scala
-;; (require 'ensime)
 ;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (require 'ensime)
 
 
 ;; Python Jedi - Autocomplete
@@ -96,10 +105,6 @@
 
 ;; Enable yaml mode
 (require 'yaml-mode)
-
-
-;; enable colume mode
-(setq column-number-mode 1)
 
 
 ;; Useless Spaces
@@ -136,10 +141,6 @@
 (define-abbrev-table 'global-abbrev-table '(
 					    ("ipdbd" "import ipdb;ipdb.set_trace()")
 					    ))
-;; stop asking whether to save newly added abbrev when quitting emacs
-(setq save-abbrevs nil)
-;; turn on abbrev mode globally
-(setq-default abbrev-mode t)
 
 
 ;; smooth scrolling
@@ -161,15 +162,29 @@
 (global-set-key "\M-p" 'scroll-down-in-place)
 
 
-;; matching parantheses
-(show-paren-mode 1)
-
-;; TAGS file is too large
-(setq large-file-warning-threshold nil)
-
 ;; ispell
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream"))))
+     (setq tags-table-list
+	   (quote
+	    ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

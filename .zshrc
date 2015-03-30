@@ -73,8 +73,14 @@ samplef() {
 }
 
 
+ctags-emacs(){
+    ctags -e -R .
+    print Done indexing $(pwd)
+}
+
 ctags-python(){
-    ctags -e -R . ${$(which python)/\/bin\/python/}
+    PYTHON_VENV=${$(which python)/\/bin\/python/}
+    ctags -e -R . $PYTHON_VENV
 }
 
 # Reload the shell

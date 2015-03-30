@@ -21,10 +21,18 @@
 
 
 ;; etags-select
-;; (define-key map (kbd "RET") 'etags-select-goto-tag)
-;; (define-key map (kbd "M-RET") 'etags-select-goto-tag-other-window)
+(require 'etags-select)
+(setq etags-select-mode 1)
+
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)
+(define-key etags-select-mode-map (kbd "C-g")   'etags-select-quit)
+(define-key etags-select-mode-map (kbd "C-x o") 'etags-select-quit)
+(define-key etags-select-mode-map (kbd "C-x O") 'etags-select-quit)
+(define-key etags-select-mode-map (kbd "C-p")   'etags-select-previous-tag)
+(define-key etags-select-mode-map (kbd "C-n")   'etags-select-next-tag)
+(define-key etags-select-mode-map (kbd "RET") 'etags-select-goto-tag)
+(define-key etags-select-mode-map (kbd "M-RET") 'etags-select-goto-tag-other-window)
 
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
@@ -33,6 +41,7 @@
 ;; (global-linum-mode t)
 ;; (setq linum-format "%d "k)
 (setq require-final-newline 0)
+
 
 ;; Auto complete
 (ac-config-default)
@@ -123,6 +132,7 @@
 (setq interprogram-paste-function 'copy-from-osx)
 
 
+;; shortcut table
 (define-abbrev-table 'global-abbrev-table '(
 					    ("ipdbd" "import ipdb;ipdb.set_trace()")
 					    ))

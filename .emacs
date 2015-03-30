@@ -28,6 +28,13 @@
 (projectile-global-mode)
 (helm-projectile-on)
 (setq projectile-completion-system 'helm)
+(setq projectile-use-native-indexing t)
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
+;; (setq projectile-globally-ignored-directories
+;;       (append '(".svn") projectile-globally-ignored-directories))
+(setq projectile-globally-ignored-files
+      (append '("*.log*" "*#*") projectile-globally-ignored-files))
 
 
 ;; Example tag tables linking

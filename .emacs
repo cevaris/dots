@@ -28,9 +28,10 @@
 (projectile-global-mode)
 (helm-projectile-on)
 (setq projectile-completion-system 'helm)
-(setq projectile-use-native-indexing t)
-(setq projectile-indexing-method 'native)
-(setq projectile-enable-caching t)
+;; (setq projectile-use-native-indexing t)
+;; (setq projectile-indexing-method 'native)
+;; (setq projectile-enable-caching t)
+;; (setq projectile-use-native-indexing t)
 ;; (setq projectile-globally-ignored-directories
 ;;       (append '(".svn") projectile-globally-ignored-directories))
 (setq projectile-globally-ignored-files
@@ -188,3 +189,51 @@
 
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "core/target"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "core/target"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

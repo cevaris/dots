@@ -72,12 +72,18 @@
 
 
 ;; Go Mode indention
-(add-hook 'go-mode-hook
-	  (lambda ()
-	    (setq-default)
-	    (setq tab-width 4)
-	    (setq standard-indent 4)
-	    (setq indent-tabs-mode 1)))
+;; (add-hook 'go-mode-hook
+;; 	  (lambda ()
+;; 	    (setq-default)
+;; 	    (setq tab-width 4)
+;; 	    (setq standard-indent 4)
+;; 	    (setq indent-tabs-mode 1)))
+(defun my-go-mode-hook ()
+  ; Call Gofmt before saving
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ; Godef jump key binding
+  (local-set-key (kbd "M-.") 'godef-jump))
+(add-hook 'go-mode-hook 'my-go-mode-hook)
 
 
 ;; Puppet indention
@@ -87,8 +93,8 @@
 
 
 ;; Ensime for Scala
-;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-;; (require 'ensime)
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 
 ;; Python Jedi - Autocomplete
@@ -102,8 +108,18 @@
 (defun annotate-pdb ()
   (interactive)
   (highlight-lines-matching-regexp "import ipdb")
-  (highlight-lines-matching-regexp "ipdb.set_trace()"))
+  (highlight-lines-matching-regexp "ipdb.set_trace()")
+  (highlight-lines-matching-regexp "binding.pry")
+  )
 (add-hook 'python-mode-hook 'annotate-pdb)
+
+
+;; shortcut table
+(define-abbrev-table 'global-abbrev-table
+  '(("ipdbd" "import ipdb;ipdb.set_trace()")
+    ("pry" "binding.pry")
+    ))
+
 
 
 ;; Flymake pep8
@@ -118,7 +134,9 @@
 (require 'whitespace)
 ;; Mode not active by default: let's activate it
 (global-whitespace-mode t)
-(setq whitespace-space 0)
+(setq whitespace-space nil)
+(setq whitespace-hspace nil)
+(setq whitespace-tab nil)
 (setq whitespace-display-mappings
       '((space-mark ?\ [] []); space
 	(newline-mark ?\n [?\u00AC ?\n]); newline
@@ -142,12 +160,6 @@
       (process-send-eof proc))))
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
-
-
-;; shortcut table
-(define-abbrev-table 'global-abbrev-table '(
-					    ("ipdbd" "import ipdb;ipdb.set_trace()")
-					    ))
 
 
 ;; smooth scrolling
@@ -175,23 +187,4 @@
 (setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values
-   (quote
-    ((eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream"))))
-     (setq tags-table-list
-	   (quote
-	    ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+

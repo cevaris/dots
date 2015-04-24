@@ -42,6 +42,7 @@ plugins=(completion)
 
 ############################################################
 # Aliases
+alias r='reload'
 alias e='emacs'
 alias em='emacs .'
 alias g='git'
@@ -149,13 +150,46 @@ function docker-setup() {
     boot2docker up
     export DOCKER_HOST=tcp://$(docker-ip):2376
     export DOCKER_CERT_PATH=/Users/$USER/.boot2docker/certs/boot2docker-vm
-    export DOCKER_TLS_VERIFY=1    
-}
+    export DOCKER_TLS_VERIFY=1}
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1
+
+# Ruby
+function rvm_init(){
+
+    RVM_VERSION=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
+    RVM_GEMSET=$(basename $(PWD))
+
+    for i in "$@"
+    do
+	case $i in
+	    -g=*|--gemset=*)
+		RVM_GEMSET="${i#*=}"
+		;;
+	    -r=*|--ruby=*)
+		RVM_VERSION="${i#*=}"
+		;;
+	    *) # unknown option
+		;;
+	esac
+    done
+
+    print Gemset: $RVM_GEMSET
+    print Version: $RVM_VERSION
+
+    if ! type rvm > /dev/null 2>&1; then
+	print RVM is not installed
+	exit 1
+    fi
+    rvm --create --ruby-version $RVM_VERSION@$RVM_GEMSET
+}
+
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/adamc/.travis/travis.sh ] && source /Users/adamc/.travis/travis.sh

@@ -39,4 +39,5 @@
 --exclude=*.min.js
 --exclude=.git
 --exclude=build
+--exclude=target
 --exclude=.tox

@@ -182,6 +182,9 @@
 (global-set-key "\M-p" 'scroll-down-in-place)
 
 
+;; Cofeescript
+(custom-set-variables '(coffee-tab-width 2))
+
 ;; ispell
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
@@ -197,6 +200,155 @@
  '(safe-local-variable-values
    (quote
     ((eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" ".ensime" "*.css" "*.js" "*.jar" "*.class" "*$*" "compile*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" ".ensime" "*.css" "*.js" "*.jar" "*.class" "*$*" "compile"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" ".ensime" "*.css" "*.js" "*$*" "compile"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" ".ensime" "*.css" "*.js" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" ".ensime" "api/target/*" "api/src/main/resources/*" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-patterns-to-ignore
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-patterns-to-ignore))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources/swagger-ui/*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/src/main/resources/swagger-ui"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "*swagger-ui*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "api/target" "api/target" "*swagger-ui*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
 	   (setq tags-table-list
 		 (quote
 		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))

@@ -5,6 +5,13 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 
+;; Cursor settings
+;; (set-foreground-color "white")
+;; ;; (set-background-color "black")
+;; (set-cursor-color "#ffffff")
+;; (setq default-frame-alist
+;;   '((cursor-color . "#ffffff")))
+
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
 ;; Line numbers
@@ -21,7 +28,6 @@
 (show-paren-mode 1)
 ;; TAGS file is too large
 (setq large-file-warning-threshold nil)
-
 
 ;; Projectile
 (require 'projectile)
@@ -183,23 +189,48 @@
 
 
 ;; Cofeescript
-(custom-set-variables '(coffee-tab-width 2))
-
-;; ispell
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
-
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
  '(safe-local-variable-values
    (quote
     ((eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "*/target" "*swagger-ui*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "core/target" "*swagger-ui*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))
+     (eval progn
 	   (setq whitespace-line-column 250)
 	   (setq projectile-globally-ignored-directories
 		 (append
@@ -383,6 +414,19 @@
 		 (quote
 		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
 	   (setq whitespace-line-column 250))))))
+
+;; magit
+(setq magit-auto-revert-mode nil)
+
+
+;; ispell
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
+
+
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

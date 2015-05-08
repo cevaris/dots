@@ -4,6 +4,7 @@
 # ZSH settings #############################################
 export ZSH=/Users/adamc/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+# export TERM=xterm-256color
 
 # Git
 source ~/.zsh.d/zsh-git-prompt/zshrc.sh
@@ -26,6 +27,7 @@ bindkey    "^[3;5~"         delete-char
 
 # Make emacs default git editor
 export GIT_EDITOR=emacs
+export VISUAL=emacs
 #export EDITOR=emacs
 
 export HISTSIZE=100000
@@ -35,6 +37,8 @@ setopt hist_ignore_all_dups
 
 # CD without typing it
 setopt autocd
+setopt automenu
+setopt banghist
 # Enables the following cp ^*.(tar|bz2|gz) . 
 setopt extendedglob
 # Completion
@@ -42,7 +46,10 @@ plugins=(completion)
 
 ############################################################
 # Aliases
+alias tmux'TERM=xterm-256color tmux'
+alias ssh='ssh -v'
 alias r='reload'
+alias emacs='emacs -nw'
 alias e='emacs'
 alias em='emacs .'
 alias g='git'
@@ -52,6 +59,7 @@ alias ll='ls -la'
 alias m='man'
 alias rm='rm -i'
 alias updatedb='/usr/libexec/locate.updatedb'
+alias dc='docker-compose'
 
 
 ############################################################ 
@@ -73,6 +81,10 @@ samplef() {
     cat $1 | perl -n -e "print if (rand() < $SAMPLE_RATIO)"
 }
 
+# Date helper
+isodate(){
+    date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
 
 ctags-emacs(){
     ctags -e -R .
@@ -180,11 +192,24 @@ function rvm_init(){
 
     if ! type rvm > /dev/null 2>&1; then
 	print RVM is not installed
-	exit 1
+	return 1
     fi
     rvm --create --ruby-version $RVM_VERSION@$RVM_GEMSET
 }
 
+# Scala
+func scala-init(){
+    if [ -z "$1" ]; then
+	print Missing project name
+	return 1
+    fi
+    SCALA_PROJ_NAME=$1
+    git clone git://github.com/cevaris/skeleton $SCALA_PROJ_NAME
+    cd $SCALA_PROJ_NAME
+    rm -rf .git
+    sed -i '' "s/bonjour/$SCALA_PROJ_NAME/" ./build.sbt
+    sbt
+}
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null

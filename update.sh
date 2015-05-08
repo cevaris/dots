@@ -6,6 +6,7 @@ ARRAY=(
     .zshrc
     .zsh.d/zsh-git-prompt/zshrc.sh
     .ctags
+    .tmux.conf
 )
 
 for i in "${ARRAY[@]}"; do

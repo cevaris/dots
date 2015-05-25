@@ -43,6 +43,11 @@
 (setq projectile-globally-ignored-files
       (append '("*.log*" "*#*") projectile-globally-ignored-files))
 
+;; ido
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 
 ;; Example tag tables linking
 ;; (setq tags-table-list
@@ -70,8 +75,9 @@
 (ac-config-default)
 
 ;; hasekll-mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode);
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 
 ;; Multiple Cursors
@@ -100,8 +106,8 @@
 
 
 ;; Ensime for Scala
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 
 ;; Python Jedi - Autocomplete
@@ -186,6 +192,26 @@
     (scroll-up n)))
 (global-set-key "\M-n" 'scroll-up-in-place)
 (global-set-key "\M-p" 'scroll-down-in-place)
+
+
+;; TAGS
+;; Revist tags if changed on disk
+(setq tags-revert-without-query t)
+;; Auto refresh tags
+(defadvice find-tag (around refresh-etags activate)
+  "Rerun etags and reload tags if tag not found and redo find-tag.
+   If buffer is modified, ask about save before running etags."
+  (let ((extension (file-name-extension (buffer-file-name))))
+    (condition-case err
+	ad-do-it
+      (error (and (buffer-modified-p)
+		  (not (ding))
+		  (y-or-n-p "Buffer is modified, save it? ")
+		  (save-buffer))
+	     (er-refresh-etags extension)
+	     ad-do-it))))
+
+
 
 
 ;; Cofeescript

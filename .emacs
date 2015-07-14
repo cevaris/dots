@@ -5,6 +5,11 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 
+(defvar prelude-packages
+  '(ac-ispell auto-complete popup ag s dash anything-git-files anything anything-git-grep anything auto-dictionary blank-mode chess circe coffee-mode csv-mode dockerfile-mode ensime scala-mode2 popup yasnippet company sbt-mode scala-mode2 auto-complete popup dash s erlang etags-select f dash s flycheck-haskell let-alist dash haskell-mode flycheck let-alist pkg-info epl dash flycheck-pyflakes flycheck let-alist pkg-info epl dash flymake-haml flymake-easy flymake-haskell-multi flymake-easy flymake-puppet flymake-easy flymake-python-pyflakes flymake-easy flymake-ruby flymake-easy flymake-shell flymake-easy flymake-yaml flymake-easy gitconfig gitconfig-mode go-autocomplete auto-complete popup go-errcheck go-mode haml-mode haskell-mode helm-projectile dash projectile pkg-info epl dash helm async ido-at-point ido-complete-space-or-hyphen ido-completing-read+ imenu+ imenu-anywhere imenu-list jedi auto-complete popup jedi-core python-environment deferred epc ctable concurrent deferred jedi-core python-environment deferred epc ctable concurrent deferred let-alist magit git-rebase-mode git-commit-mode markdown-mode+ markdown-mode markdown-mode multiple-cursors neotree nginx-mode popup projectile pkg-info epl dash puppet-mode pkg-info epl py-autopep8 python-environment deferred python-mode rspec-mode ruby-dev rvm s sbt-mode scala-mode2 scala-mode2 solarized-theme dash xcscope yaml-mode yasnippet)
+)
+
+
 ;; Cursor settings
 ;; (set-foreground-color "white")
 ;; ;; (set-background-color "black")

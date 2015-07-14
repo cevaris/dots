@@ -14,6 +14,8 @@
 
 ;; Highlight text while in mark mode
 (transient-mark-mode t)
+;; Allways display latests file version
+(auto-revert-mode t)
 ;; Line numbers
 (global-linum-mode t)
 (setq linum-format "%4d\u2502 ")
@@ -212,7 +214,21 @@
 	     ad-do-it))))
 
 
+;; IRC
+;; (setq circe-network-options
+;;       `(("Freenode"
+;; 	:nick "cevaris"
+;; 	:channels ("#programming)
+;; 	:nickserv-password freenode-password)))
 
+;; (defun irc ()
+;;   "Connect to IRC"
+;;   (interactive)
+;;   (circe "Freenode")
+;;   ;; (circe "Bitlbee")
+;;   ;; (circe "IRCnet")
+;;   ;; (circe "Snoonet")
+;;   )
 
 ;; Cofeescript
 (custom-set-variables
@@ -445,10 +461,10 @@
 (setq magit-auto-revert-mode nil)
 
 
-;; ispell
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
+;; ;; ispell
+;; (dolist (hook '(text-mode-hook))
+;;   (add-hook hook (lambda () (flyspell-mode 1))))
+;; (setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
 
 
 

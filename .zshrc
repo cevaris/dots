@@ -59,7 +59,7 @@ alias ll='ls -la'
 alias m='man'
 alias rm='rm -i'
 alias updatedb='/usr/libexec/locate.updatedb'
-alias dc='docker-compose'
+alias compose='docker-compose'
 
 
 ############################################################ 
@@ -128,7 +128,7 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.7
+setjdk 1.8
 
 # General Path Helper
 function pathAdd() {

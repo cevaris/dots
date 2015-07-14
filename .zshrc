@@ -2,7 +2,7 @@
 
 ############################################################
 # ZSH settings #############################################
-export ZSH=/Users/adamc/.oh-my-zsh
+export ZSH=/Users/$USER/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # export TERM=xterm-256color
 
@@ -217,4 +217,4 @@ source ~/.shell-local 2> /dev/null
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # added by travis gem
-[ -f /Users/adamc/.travis/travis.sh ] && source /Users/adamc/.travis/travis.sh
+[ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh

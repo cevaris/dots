@@ -1,14 +1,8 @@
-;; MELPA
+;;; MELPA
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
-
-
-(defvar prelude-packages
-  '(ac-ispell auto-complete popup ag s dash anything-git-files anything anything-git-grep anything auto-dictionary blank-mode chess circe coffee-mode csv-mode dockerfile-mode ensime scala-mode2 popup yasnippet company sbt-mode scala-mode2 auto-complete popup dash s erlang etags-select f dash s flycheck-haskell let-alist dash haskell-mode flycheck let-alist pkg-info epl dash flycheck-pyflakes flycheck let-alist pkg-info epl dash flymake-haml flymake-easy flymake-haskell-multi flymake-easy flymake-puppet flymake-easy flymake-python-pyflakes flymake-easy flymake-ruby flymake-easy flymake-shell flymake-easy flymake-yaml flymake-easy gitconfig gitconfig-mode go-autocomplete auto-complete popup go-errcheck go-mode haml-mode haskell-mode helm-projectile dash projectile pkg-info epl dash helm async ido-at-point ido-complete-space-or-hyphen ido-completing-read+ imenu+ imenu-anywhere imenu-list jedi auto-complete popup jedi-core python-environment deferred epc ctable concurrent deferred jedi-core python-environment deferred epc ctable concurrent deferred let-alist magit git-rebase-mode git-commit-mode markdown-mode+ markdown-mode markdown-mode multiple-cursors neotree nginx-mode popup projectile pkg-info epl dash puppet-mode pkg-info epl py-autopep8 python-environment deferred python-mode rspec-mode ruby-dev rvm s sbt-mode scala-mode2 scala-mode2 solarized-theme dash xcscope yaml-mode yasnippet)
-)
-
 
 ;; Cursor settings
 ;; (set-foreground-color "white")
@@ -39,11 +33,12 @@
 ;; Projectile
 (require 'projectile)
 (projectile-global-mode)
-(helm-projectile-on)
-(setq projectile-completion-system 'helm)
+;; (helm-projectile-on)
+;; (setq projectile-completion-system 'helm)
+
 ;; (setq projectile-use-native-indexing t)
 ;; (setq projectile-indexing-method 'native)
-;; (setq projectile-enable-caching t)
+(setq projectile-enable-caching t)
 ;; (setq projectile-use-native-indexing t)
 ;; (setq projectile-globally-ignored-directories
 ;;       (append '(".svn") projectile-globally-ignored-directories))
@@ -93,11 +88,11 @@
 
 ;; Go Mode indention
 ;; (add-hook 'go-mode-hook
-;; 	  (lambda ()
-;; 	    (setq-default)
-;; 	    (setq tab-width 4)
-;; 	    (setq standard-indent 4)
-;; 	    (setq indent-tabs-mode 1)))
+;;	  (lambda ()
+;;	    (setq-default)
+;;	    (setq tab-width 4)
+;;	    (setq standard-indent 4)
+;;	    (setq indent-tabs-mode 1)))
 (defun my-go-mode-hook ()
   ; Call Gofmt before saving
   (add-hook 'before-save-hook 'gofmt-before-save)
@@ -115,7 +110,8 @@
 ;; Ensime for Scala
 ;; (require 'ensime)
 ;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
+;; (unless (package-installed-p 'scala-mode2)
+;;   (package-refresh-contents) (package-install 'scala-mode2))
 
 ;; Python Jedi - Autocomplete
 (add-hook 'python-mode-hook 'jedi:setup)
@@ -130,6 +126,7 @@
   (highlight-lines-matching-regexp "import ipdb")
   (highlight-lines-matching-regexp "ipdb.set_trace()")
   (highlight-lines-matching-regexp "binding.pry")
+  (highlight-lines-matching-regexp "var")
   )
 (add-hook 'python-mode-hook 'annotate-pdb)
 
@@ -142,7 +139,7 @@
 
 
 
-;; Flymake pep8
+;; flymake pep8
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
@@ -235,248 +232,6 @@
 ;;   ;; (circe "Snoonet")
 ;;   )
 
-;; Cofeescript
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(custom-safe-themes
-   (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
- '(safe-local-variable-values
-   (quote
-    ((eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "*/target" "*swagger-ui*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "core/target" "*swagger-ui*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" ".ensime" "*.css" "*.js" "*.jar" "*.class" "*$*" "compile*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" ".ensime" "*.css" "*.js" "*.jar" "*.class" "*$*" "compile"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" ".ensime" "*.css" "*.js" "*$*" "compile"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" ".ensime" "*.css" "*.js" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" ".ensime" "api/target/*" "api/src/main/resources/*" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-patterns-to-ignore
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-patterns-to-ignore))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources/swagger-ui/*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/src/main/resources/swagger-ui"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "*swagger-ui*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "api/target" "api/target" "*swagger-ui*"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "core/target"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
-	   (setq whitespace-line-column 250)
-	   (setq projectile-globally-ignored-directories
-		 (append
-		  (quote
-		   (".git" ".ensime_cache" "core/target"))
-		  projectile-globally-ignored-directories))
-	   (setq projectile-globally-ignored-files
-		 (append
-		  (quote
-		   ("*.xml" "*$$*"))
-		  projectile-globally-ignored-files)))
-     (eval progn
-	   (setq tags-table-list
-		 (quote
-		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
-	   (setq whitespace-line-column 250))))))
 
 ;; magit
 (setq magit-auto-revert-mode nil)
-
-
-;; ;; ispell
-;; (dolist (hook '(text-mode-hook))
-;;   (add-hook hook (lambda () (flyspell-mode 1))))
-;; (setq ispell-program-name "/usr/local/Cellar/ispell/3.3.02/bin/ispell")
-
-
-
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

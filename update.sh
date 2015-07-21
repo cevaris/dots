@@ -4,7 +4,7 @@ set -x
 ARRAY=(
     .emacs
     .zshrc
-    .zsh.d/zsh-git-prompt/zshrc.sh
+    # .zsh.d/zsh-git-prompt/zshrc.sh
     .ctags
     .tmux.conf
 )

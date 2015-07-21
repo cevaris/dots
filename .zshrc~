@@ -7,15 +7,10 @@ source $ZSH/oh-my-zsh.sh
 # export TERM=xterm-256color
 
 # Git
-export GIT_PROMPT_EXECUTABLE="haskell"
 source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 
 # Prompt
 function precmd {
-    # if [[ $PWD/ = ~/workspace* ]]; then
-    # 	PROMPT="%{$fg[green]%}%c ($(git symbolic-ref --short HEAD))%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    # 	return
-    # fi
     PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
     if ! [ -z "$VIRTUAL_ENV" ]; then
 	PROMPT="(`basename \"$VIRTUAL_ENV\"`)$PROMPT"
@@ -77,7 +72,7 @@ samplef() {
 	echo
 	echo 'Usage:'
 	echo 'samplef <FILEPATH> <SAMPLE_SIZE>'
-	echo
+	echo 
 	echo 'Optional paramters: <SAMPLE_SIZE>, default is 0.1'
 	echo 'ex; samplef ./myfile.txt 0.25'
 	return
@@ -133,7 +128,7 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.7
+setjdk 1.8
 
 # General Path Helper
 function pathAdd() {
@@ -144,7 +139,7 @@ function pathAdd() {
 
 # Python virtualenv
 export WORKON_HOME=~/.envs
-# source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Go dev
 alias goplay='cd /go/src/github.com/cevaris'

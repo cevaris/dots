@@ -51,23 +51,40 @@ plugins=(completion)
 
 ############################################################
 # Aliases
-alias tmux'TERM=xterm-256color tmux'
-alias ssh='ssh -v'
-alias r='reload'
-alias emacs='emacs -nw'
+alias compose='docker-compose'
 alias e='emacs'
 alias em='emacs .'
+alias emacs='emacs -nw'
 alias g='git'
 alias hd='hexdump -C'
 alias l='less'
 alias ll='ls -la'
 alias m='man'
+alias mci='mvn clean compile  -Denforcer.skip=true'
+alias pbsort='pbpaste | sort | pbcopy'
+alias r='reload'
 alias rm='rm -i'
+alias ssh='ssh -v'
+alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
-alias compose='docker-compose'
 
+############################################################
 
-############################################################ 
+# List files
+lf() {
+    if [ -z "${1}" ]; then
+	echo 'Usage:'
+	echo 'lf <PATTERN>'
+	echo 'lf <PATH> <PATTERN>'
+	return
+    fi
+
+    if [ -z "${2}" ]; then
+	find . -name $1 -type f
+    else
+	find $1 -name $2 -type f
+    fi
+}
 
 # Sample file
 samplef() {
@@ -214,6 +231,13 @@ func scala-init(){
     rm -rf .git
     sed -i '' "s/bonjour/$SCALA_PROJ_NAME/" ./build.sbt
     sbt
+}
+
+# Kill by port
+func kill-port() {
+    _PID_TO_KILL=$(lsof -i :$1 | tail -n 1 | awk '{print $2}')
+    echo "Killing port $_PID_TO_KILL"
+    kill $_PID_TO_KILL
 }
 
 #Load Local dot files under .local

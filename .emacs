@@ -51,13 +51,8 @@
 (ido-mode 1)
 
 
-;; Example tag tables linking
-;; (setq tags-table-list
-;;       '("/git/Big-Data"
-;; 	"/git/scala"
-;; 	"/git/scalaz"
-;; 	"/git/scalaz-stream"
-;; 	))
+;; Auto mode files
+(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 
 ;; etags-select
 (require 'etags-select)
@@ -113,22 +108,31 @@
 ;; (unless (package-installed-p 'scala-mode2)
 ;;   (package-refresh-contents) (package-install 'scala-mode2))
 
-;; Python Jedi - Autocomplete
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-(setq-default python-indent 2)
-(setq-default python-guess-indent nil)
+;; python Jedi - Autocomplete
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
+;; (setq-default python-indent 2)
+;; (setq-default python-guess-indent nil)
+;; (smart-tabs-advice python-indent-line-1 python-indent)
+;; (add-hook 'python-mode-hook
+;; 	  (lambda ()
+;; 	    (setq indent-tabs-mode t)
+;; 	    (setq tab-width (default-value 'tab-width))))
+;; (smart-tabs-advice py-indent-line py-indent-offset)
+;; (smart-tabs-advice py-newline-and-indent py-indent-offset)
+;; (smart-tabs-advice py-indent-region py-indent-offset)
 
 
-;; ipdb highlight
-(defun annotate-pdb ()
+;; code highlight
+(defun annotate-code ()
   (interactive)
   (highlight-lines-matching-regexp "import ipdb")
   (highlight-lines-matching-regexp "ipdb.set_trace()")
   (highlight-lines-matching-regexp "binding.pry")
   (highlight-lines-matching-regexp "var")
   )
-(add-hook 'python-mode-hook 'annotate-pdb)
+(add-hook 'python-mode-hook 'annotate-code)
+(add-hook 'scala-mode-hook 'annotate-code)
 
 
 ;; shortcut table
@@ -136,7 +140,6 @@
   '(("ipdbd" "import ipdb;ipdb.set_trace()")
     ("pry" "binding.pry")
     ))
-
 
 
 ;; flymake pep8

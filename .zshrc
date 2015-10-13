@@ -57,6 +57,7 @@ alias em='emacs .'
 alias emacs='emacs -nw'
 alias g='git'
 alias hd='hexdump -C'
+alias less='less -N'
 alias l='less'
 alias ll='ls -la'
 alias m='man'
@@ -67,7 +68,9 @@ alias rm='rm -i'
 alias ssh='ssh -v'
 alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
-
+alias pants='./pants'
+alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
+alias jvis="jvisualvm --openjmx"
 ############################################################
 
 # List files
@@ -239,6 +242,9 @@ func kill-port() {
     echo "Killing port $_PID_TO_KILL"
     kill $_PID_TO_KILL
 }
+
+# JVX
+function jvx() { jvis $1:36001 ;}
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null

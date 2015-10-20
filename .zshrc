@@ -12,13 +12,13 @@ source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 
 # Prompt
 function precmd {
-    # if [[ $PWD/ = ~/workspace* ]]; then
-    # 	PROMPT="%{$fg[green]%}%c ($(git symbolic-ref --short HEAD))%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    # 	return
-    # fi
-    PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    if ! [ -z "$VIRTUAL_ENV" ]; then
-	PROMPT="(`basename \"$VIRTUAL_ENV\"`)$PROMPT"
+    if [[ $PWD/ = ~/workspace/source* ]]; then
+	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(git symbolic-ref --short HEAD)%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+    else
+	PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+	if ! [ -z "$VIRTUAL_ENV" ]; then
+	    PROMPT="(`basename \"$VIRTUAL_ENV\"`)$PROMPT"
+	fi
     fi
 }
 

@@ -29,6 +29,8 @@
 (show-paren-mode 1)
 ;; TAGS file is too large
 (setq large-file-warning-threshold nil)
+;; backup files under home directory
+(setq backup-directory-alist `(("." . "~/.saves")))
 
 ;; Projectile
 (require 'projectile)

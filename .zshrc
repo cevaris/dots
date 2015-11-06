@@ -14,6 +14,7 @@ source ~/.zsh.d/zsh-git-prompt/zshrc.sh
 function precmd {
     if [[ $PWD/ = ~/workspace/source* ]]; then
 	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(git symbolic-ref --short HEAD)%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+	#PROMPT="%{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
     else
 	PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
 	if ! [ -z "$VIRTUAL_ENV" ]; then
@@ -71,6 +72,8 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias pants='./pants'
 alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias jvis="jvisualvm --openjmx"
+alias git-deploy='git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
+alias git-master='git co master && git pull origin master  && git reset --hard origin/master'
 ############################################################
 
 # List files
@@ -164,7 +167,10 @@ function pathAdd() {
 
 # Python virtualenv
 export WORKON_HOME=~/.envs
-# source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
+source $(which virtualenvwrapper.sh)
 
 # Go dev
 alias goplay='cd /go/src/github.com/cevaris'
@@ -243,11 +249,18 @@ func kill-port() {
     kill $_PID_TO_KILL
 }
 
+# gitignore
+func gitignore() {
+    curl https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
+}
+
 # JVX
 function jvx() { jvis $1:36001 ;}
 
 #Load Local dot files under .local
 source ~/.shell-local 2> /dev/null
+
+export DEPLOY_TAG='SET_ME!!!'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 

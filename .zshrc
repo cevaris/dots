@@ -74,6 +74,7 @@ alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias jvis="jvisualvm --openjmx"
 alias git-deploy='git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
 alias git-master='git co master && git pull origin master  && git reset --hard origin/master'
+alias fab='fab --show=debug'
 ############################################################
 
 # List files
@@ -264,5 +265,8 @@ export DEPLOY_TAG='SET_ME!!!'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+# source ~/.bash_profile
+
 # added by travis gem
 [ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

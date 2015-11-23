@@ -35,18 +35,22 @@ bindkey    "^[3;5~"         delete-char
 export GIT_EDITOR=emacs
 export VISUAL=emacs
 #export EDITOR=emacs
-
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups
 
-# CD without typing it
-setopt autocd
+setopt extended_history
+setopt hist_ignore_all_dups
+setopt histignorespace
+setopt auto_cd
 setopt automenu
 setopt banghist
-# Enables the following cp ^*.(tar|bz2|gz) . 
+setopt correct
+setopt no_clobber
+setopt chase_dots
 setopt extendedglob
+setopt share_history
+
 # Completion
 plugins=(completion)
 
@@ -72,9 +76,11 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias pants='./pants'
 alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias jvis="jvisualvm --openjmx"
-alias git-deploy='git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
+alias git-deploy='git b -D deploy || true && git fetch origin deploy && git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
 alias git-master='git co master && git pull origin master  && git reset --hard origin/master'
 alias fab='fab --show=debug'
+alias csv='column -s, -t -x'
+alias py.test'py.test -s'
 ############################################################
 
 # List files
@@ -263,9 +269,8 @@ source ~/.shell-local 2> /dev/null
 
 export DEPLOY_TAG='SET_ME!!!'
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# source ~/.bash_profile
+#source ~/.bash_profile
+[[ -s "/opt/twitter/rvm/scripts/rvm" ]] && source "/opt/twitter/rvm/scripts/rvm"
 
 # added by travis gem
 [ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh

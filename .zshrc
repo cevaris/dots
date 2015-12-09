@@ -77,7 +77,7 @@ alias pants='./pants'
 alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias jvis="jvisualvm --openjmx"
 alias git-deploy='git b -D deploy || true && git fetch origin deploy && git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
-alias git-master='git co master && git pull origin master  && git reset --hard origin/master'
+alias git-master='git co master && git pull origin master'
 alias fab='fab --show=debug'
 alias csv='column -s, -t -x'
 alias py.test'py.test -s'
@@ -119,6 +119,9 @@ samplef() {
 # Date helper
 isodate(){
     date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
+lexicaldate(){
+    date -u +"%Y%m%d%H%M%S"
 }
 
 ctags-emacs(){
@@ -235,6 +238,15 @@ function rvm_init(){
     rvm --create --ruby-version $RVM_VERSION@$RVM_GEMSET
 }
 
+func git-tag(){
+    _DATE=$(lexicaldate)
+    _TAG_NAME="$1-$_DATE"
+    echo "creating tag $_TAG_NAME"
+    git tag -a $_TAG_NAME -m "$1"
+    echo "pushing tag $_TAG_NAME"
+    git push origin $_TAG_NAME
+}
+
 # Scala
 func scala-init(){
     if [ -z "$1" ]; then
@@ -268,6 +280,7 @@ function jvx() { jvis $1:36001 ;}
 source ~/.shell-local 2> /dev/null
 
 export DEPLOY_TAG='SET_ME!!!'
+#export DEPLOY_TAG=''
 
 #source ~/.bash_profile
 [[ -s "/opt/twitter/rvm/scripts/rvm" ]] && source "/opt/twitter/rvm/scripts/rvm"

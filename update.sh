@@ -4,6 +4,8 @@ set -x
 ARRAY=(
     .emacs
     .ctags
+    .githelpers
+    .gitignore_global
     .local.bash
     .tmux.conf
     .zshrc

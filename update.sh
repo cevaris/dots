@@ -6,9 +6,9 @@ ARRAY=(
     .ctags
     .githelpers
     .gitignore_global
-    .local.bash
     .tmux.conf
     .zshrc
+    .zshfuncs
 )
 
 for i in "${ARRAY[@]}"; do

@@ -30,7 +30,11 @@
 ;; TAGS file is too large
 (setq large-file-warning-threshold nil)
 ;; backup files under home directory
-(setq backup-directory-alist `(("." . "~/.saves")))
+;; (setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; Projectile
 (require 'projectile)

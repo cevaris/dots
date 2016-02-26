@@ -3,10 +3,10 @@
 set -x
 ARRAY=(
     .emacs
-    .zshrc
-    # .zsh.d/zsh-git-prompt/zshrc.sh
     .ctags
+    .local.bash
     .tmux.conf
+    .zshrc
 )
 
 for i in "${ARRAY[@]}"; do

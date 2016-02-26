@@ -2,34 +2,18 @@
 
 ############################################################
 # ZSH settings #############################################
-export ZSH=/Users/$USER/.oh-my-zsh
+export ZSH=/Users/$USER/.oh-my-zsh/
 source $ZSH/oh-my-zsh.sh
-# export TERM=xterm-256color
 
-# Git
-export GIT_PROMPT_EXECUTABLE="haskell"
-source ~/.zsh.d/zsh-git-prompt/zshrc.sh
-
-# Prompt
-function precmd {
-    if [[ $PWD/ = ~/workspace/source* ]]; then
-	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(git symbolic-ref --short HEAD)%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-	#PROMPT="%{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    else
-	PROMPT="%{$fg[green]%}%c $(git_super_status)%{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-	if ! [ -z "$VIRTUAL_ENV" ]; then
-	    PROMPT="(`basename \"$VIRTUAL_ENV\"`)$PROMPT"
-	fi
-    fi
-}
-
+# Completion
+plugins=()
 
 # Colors
 autoload -U colors && colors
 
 # Delete key
-bindkey    "^[[3~"          delete-char
-bindkey    "^[3;5~"         delete-char
+bindkey "^[[3~"  delete-char
+bindkey "^[3;5~" delete-char
 
 # Make emacs default git editor
 export GIT_EDITOR=emacs
@@ -51,36 +35,46 @@ setopt chase_dots
 setopt extendedglob
 setopt share_history
 
-# Completion
-plugins=(completion)
+function precmd {
+    source /opt/twitter/opt/git/etc/bash_completion.d/git-prompt.sh
+    if [[ $(__git_ps1 "%s") = *[!\ ]* ]]; then
+	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(__git_ps1 "%s")%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+    else
+	PROMPT="%{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+    fi
+}
+
+export GIT_TAG='SET_ME!!!'
+export GIT_TAG='dataproducts/deploy-tag-20160218-090236'
 
 ############################################################
 # Aliases
 alias compose='docker-compose'
+alias csv='column -s, -t -x'
 alias e='emacs'
 alias em='emacs .'
 alias emacs='emacs -nw'
+alias fab='fab --show=debug'
 alias g='git'
+alias gci='git ci -am'
+alias git-master='git co master && git pull origin master'
 alias hd='hexdump -C'
-alias less='less -N'
+alias jvis="jvisualvm --openjmx"
+alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias l='less'
+alias less='less -N'
 alias ll='ls -la'
 alias m='man'
 alias mci='mvn clean compile  -Denforcer.skip=true'
-alias pbsort='pbpaste | sort | pbcopy'
+alias pants='./pants'
+alias pbsort='pbpaste | sort | uniq | pbcopy'
+alias py.test'py.test -s'
+alias python='ipython'
 alias r='reload'
 alias rm='rm -i'
 alias ssh='ssh -v'
 alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
-alias pants='./pants'
-alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
-alias jvis="jvisualvm --openjmx"
-alias git-deploy='git b -D deploy || true && git fetch origin deploy && git co deploy && git pull origin deploy  && git reset --hard origin/deploy'
-alias git-master='git co master && git pull origin master'
-alias fab='fab --show=debug'
-alias csv='column -s, -t -x'
-alias py.test'py.test -s'
 ############################################################
 
 # List files
@@ -117,6 +111,9 @@ samplef() {
 }
 
 # Date helper
+utc(){
+    date -u
+}
 isodate(){
     date -u +"%Y-%m-%dT%H:%M:%SZ"
 }
@@ -239,6 +236,10 @@ function rvm_init(){
 }
 
 func git-tag(){
+    if [ -z "$1" ]; then
+	print Missing tag prefix
+	return 1
+    fi
     _DATE=$(lexicaldate)
     _TAG_NAME="$1-$_DATE"
     echo "creating tag $_TAG_NAME"
@@ -276,15 +277,4 @@ func gitignore() {
 # JVX
 function jvx() { jvis $1:36001 ;}
 
-#Load Local dot files under .local
-source ~/.shell-local 2> /dev/null
-
-export DEPLOY_TAG='SET_ME!!!'
-#export DEPLOY_TAG=''
-
-#source ~/.bash_profile
-[[ -s "/opt/twitter/rvm/scripts/rvm" ]] && source "/opt/twitter/rvm/scripts/rvm"
-
-# added by travis gem
-[ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s ${HOME}/.local.bash ]] && source ${HOME}/.local.bash &>/dev/null

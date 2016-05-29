@@ -1,8 +1,10 @@
 ;;; MELPA
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (package-initialize)
+
 
 ;; Cursor settings
 ;; (set-foreground-color "white")
@@ -35,6 +37,7 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+(setq make-backup-files nil)
 
 ;; Projectile
 (require 'projectile)
@@ -155,6 +158,13 @@
 ;; Enable yaml mode
 (require 'yaml-mode)
 
+;; Ruby
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+(setq ruby-deep-indent-paren nil)
+(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
+(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+  (rvm-activate-corresponding-ruby))
 
 ;; Useless Spaces
 (require 'whitespace)
@@ -206,7 +216,6 @@
 (global-set-key "\M-n" 'scroll-up-in-place)
 (global-set-key "\M-p" 'scroll-down-in-place)
 
-
 ;; TAGS
 ;; Revist tags if changed on disk
 (setq tags-revert-without-query t)
@@ -244,3 +253,39 @@
 
 ;; magit
 (setq magit-auto-revert-mode nil)
+
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+	ad-do-it)
+    ad-do-it))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+	   (setq tags-table-list
+		 (quote
+		  ("/git/Big-Data" "/git/scala" "/git/scalaz" "/git/scalaz-stream")))
+	   (setq whitespace-line-column 250)
+	   (setq projectile-globally-ignored-directories
+		 (append
+		  (quote
+		   (".git" ".ensime_cache" "*/target" "*swagger-ui*"))
+		  projectile-globally-ignored-directories))
+	   (setq projectile-globally-ignored-files
+		 (append
+		  (quote
+		   ("*.xml" "*$*"))
+		  projectile-globally-ignored-files)))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -5,6 +5,8 @@
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
 
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin/"))
+(setq exec-path (append exec-path '("/usr/local/bin/")))
 
 ;; Cursor settings
 ;; (set-foreground-color "white")
@@ -40,19 +42,18 @@
 (setq make-backup-files nil)
 
 ;; Projectile
-(require 'projectile)
-(projectile-global-mode)
+;;(require 'projectile)
+;;(projectile-global-mode)
 ;; (helm-projectile-on)
 ;; (setq projectile-completion-system 'helm)
 
 ;; (setq projectile-use-native-indexing t)
 ;; (setq projectile-indexing-method 'native)
-(setq projectile-enable-caching t)
+;;(setq projectile-enable-caching t)
 ;; (setq projectile-use-native-indexing t)
 ;; (setq projectile-globally-ignored-directories
 ;;       (append '(".svn") projectile-globally-ignored-directories))
-(setq projectile-globally-ignored-files
-      (append '("*.log*" "*#*") projectile-globally-ignored-files))
+;;(setq projectile-globally-ignored-files (append '("*.log*" "*#*") projectile-globally-ignored-files))
 
 ;; ido
 (setq ido-enable-flex-matching t)
@@ -112,10 +113,10 @@
 
 
 ;; Ensime for Scala
-;; (require 'ensime)
-;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-;; (unless (package-installed-p 'scala-mode2)
-;;   (package-refresh-contents) (package-install 'scala-mode2))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(unless (package-installed-p 'scala-mode2)
+  (package-refresh-contents) (package-install 'scala-mode2))
 
 ;; python Jedi - Autocomplete
 ;; (add-hook 'python-mode-hook 'jedi:setup)

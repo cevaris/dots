@@ -36,7 +36,7 @@
 	hp = "!. ~/.githelpers && show_git_head"
 	r = !git l -20
 	ra = !git r --all
-	l = "!. ~/.githelpers && pretty_git_log"
+	l = log
 	la = !git l --all
 [credential]
 	helper = osxkeychain

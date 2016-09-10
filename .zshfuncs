@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # List files
 lf() {
@@ -110,7 +110,7 @@ source $(which virtualenvwrapper.sh)
 alias goplay='cd /go/src/github.com/cevaris'
 export GOPATH=/go
 export GOBIN=$GOPATH/bin
-pathAdd $GOBIN
+export PATH=$GOBIN/bin:$PATH
 
 function docker-ip() {
     boot2docker ip 2> /dev/null
@@ -208,59 +208,23 @@ function got() {
 	 open "http://go/$1"
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then
-  source "$HOME/.rvm/scripts/rvm"
-elif [[ -s "/usr/local/rvm/scripts/rvm" ]] ; then
-  source "/usr/local/rvm/scripts/rvm"
-else
-  printf "ERROR: An RVM installation was not found.\n"
-fi
-
-
-###
-# workspace auto complete
-function _workspace_root_dir() {
-    echo "${HOME}/workspace"
-}
-
-function _project_dir() {
-    local dir="$(_workspace_root_dir)/$1"
-    local cur="${dir}/current"
-
-    if [ -d "$cur" ]; then
-	echo "$cur"
-    elif [ -d "$dir" ]; then
-	echo "$dir"
-    else
-	echo ""
-    fi
-}
-
-function _workspace_root_dir_complete() {
-    local root_dir=$(_workspace_root_dir)
-    local word=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=($(compgen -W "$(ls $root_dir)" -- "${word}"))
-}
-
-function cdw() {
-    local project_name=$1
-    shift
-
-    if [ -z "$project_name" ]; then
-	cd $(_workspace_root_dir)
-	return $?
-    fi
-
-    local dir=$(_project_dir "$project_name")
-
-    if [ -n "$dir" ]; then
-	cd $dir
-    else
-	echo "can not find project $project_name"
+function removeKnownHost() {
+    TO_BE_REMOVED=$1
+    if [ -z "$1" ]; then
+	echo 'Missing hostname.'
 	return 1
     fi
+
+    LINE_NUMBER=$(ssh-keygen -F "${TO_BE_REMOVED}" | head -n 1 |  grep -oP '(\d+)')
+    if [ -z "$LINE_NUMBER" ]; then
+	echo 'Hostname not found in known hosts.'
+	return 1
+    fi
+
+    sed -i .bk "${LINE_NUMBER}d" ~/.ssh/known_hosts
 }
-complete -F _workspace_root_dir_complete cdw
-###
+
+cdw() { cd ~/workspace/${@}; }
+compctl -/ -W ~/workspace cdw
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

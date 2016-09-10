@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 ############################################################
 # ZSH settings #############################################
@@ -20,7 +20,6 @@ bindkey "^[3;5~" delete-char
 # Make emacs default git editor
 export GIT_EDITOR=emacs
 export VISUAL=emacs
-#export EDITOR=emacs
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
@@ -53,18 +52,14 @@ function precmd {
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
 alias dots='emacs -nw /git/dots/'
-alias e='emacs'
-alias em='emacs .'
 alias emacs='emacs -nw'
 alias fab='fab --show=debug'
-alias g='git'
-alias gci='git ci -am'
-alias gm='git co master && git pull origin master'
-alias gpom='git push origin master'
+#alias gci='git ci -am'
+#alias gm='git co master && git pull origin master'
+#alias gpom='git push origin master'
 alias hd='hexdump -C'
 alias jvis="jvisualvm --openjmx"
 alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
-alias l='less'
 alias less='less -N'
 alias ll='ls -la'
 alias m='man'
@@ -75,17 +70,23 @@ alias py.test'py.test -s'
 alias rake='noglob rake'
 alias r='reload'
 alias rm='rm -i'
-alias ssh='TERM=xterm ssh -v'
+alias ssh='TERM=xterm ssh'
+alias timeout=gtimeout
 alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
 ############################################################
 
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 
+export GIT_TAG='dataproducts/deploy-tag-20160830-151722'
+
+export PATH=$PATH:/usr/local/cassandra/bin
+export PATH=$PATH:/usr/local/elasticsearch/bin
 export PATH=$PATH:/usr/local/hadoop/bin
 export PATH=$PATH:/usr/local/kafka/bin
+export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
-export GIT_TAG='SET_ME!!!'
-export GIT_TAG='dataproducts/deploy-tag-20160526-100758'
+export PATH=/opt/twitter/rvm/bin:$PATH
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

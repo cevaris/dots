@@ -2,6 +2,7 @@
 
 set -x
 ARRAY=(
+    .amethyst
     .emacs
     .ctags
     .githelpers

@@ -19,6 +19,7 @@ bindkey "^[3;5~" delete-char
 
 # Make emacs default git editor
 export GIT_EDITOR=emacs
+export EDITOR=emacs
 export VISUAL=emacs
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
@@ -54,6 +55,7 @@ alias csv='column -s, -t -x'
 alias dots='emacs -nw /git/dots/'
 alias emacs='emacs -nw'
 alias fab='fab --show=debug'
+alias fmt80='pbpaste | fmt -w 80 | pbcopy'
 #alias gci='git ci -am'
 #alias gm='git co master && git pull origin master'
 #alias gpom='git push origin master'
@@ -64,7 +66,7 @@ alias less='less -N'
 alias ll='ls -la'
 alias m='man'
 alias mci='mvn clean compile  -Denforcer.skip=true'
-alias pants='./pants'
+#alias pants='./pants'
 alias pbsort='pbpaste | sort | uniq | pbcopy'
 alias py.test'py.test -s'
 alias rake='noglob rake'
@@ -77,8 +79,9 @@ alias updatedb='/usr/libexec/locate.updatedb'
 ############################################################
 
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
+[[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
-export GIT_TAG='dataproducts/deploy-tag-20160830-151722'
+export GIT_TAG='dataproducts/deploy-tag-20170126-162242'
 
 export PATH=$PATH:/usr/local/cassandra/bin
 export PATH=$PATH:/usr/local/elasticsearch/bin
@@ -88,5 +91,9 @@ export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
-export PATH=/opt/twitter/rvm/bin:$PATH
+export NVM_DIR="$HOME/.nvm"
+source "/usr/local/opt/nvm/nvm.sh"
+
+
+#export PATH=/opt/twitter/rvm/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

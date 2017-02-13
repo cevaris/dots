@@ -50,6 +50,7 @@ function precmd {
 
 ############################################################
 # Aliases
+alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
 alias dots='emacs -nw /git/dots/'

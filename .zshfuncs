@@ -233,6 +233,14 @@ function yq() {
     cat - | yaml2json | jq $1
 }
 
+function rword(){
+    WORDFILE=/usr/share/dict/words
+    # using cat means wc outputs only a number, not number followed by filename
+    lines=$(cat $WORDFILE  | wc -l);
+    rnum=$((RANDOM*RANDOM%$lines+1));
+    sed -n "$rnum p" $WORDFILE
+}
+
 cdw() { cd ~/workspace/${@}; }
 compctl -/ -W ~/workspace cdw
 

@@ -68,16 +68,6 @@ reload() {
     fi
 }
 
-# Search with line numbers :)
-search() {
-    grep -inrw $(pwd) -e $1
-}
-
-# Validation of puppet recursively
-ppv() {
-    puppet parser validate $(find /git/puppet -name "*.pp")
-}
-
 # Java
 function setjdk() {
   if [ $# -ne 0 ]; then
@@ -92,7 +82,7 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.8
+#setjdk 1.8
 
 # General Path Helper
 function pathAdd() {
@@ -106,7 +96,7 @@ export WORKON_HOME=~/.envs
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-source $(which virtualenvwrapper.sh)
+#source $(which virtualenvwrapper.sh)
 
 # Go dev
 alias goplay='cd /go/src/github.com/cevaris'
@@ -208,10 +198,6 @@ func gitignore() {
 # JVX
 function jvx() { jvis $1:36001 ;}
 
-function got() {
-	 open "http://go/$1"
-}
-
 function removeKnownHost() {
     TO_BE_REMOVED=$1
     if [ -z "$1" ]; then
@@ -243,6 +229,3 @@ function rword(){
 
 cdw() { cd ~/workspace/${@}; }
 compctl -/ -W ~/workspace cdw
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

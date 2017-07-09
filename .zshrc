@@ -50,6 +50,7 @@ function precmd {
 
 ############################################################
 # Aliases
+alias arc='arc --trace'
 alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
@@ -82,7 +83,7 @@ alias updatedb='/usr/libexec/locate.updatedb'
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
-export GIT_TAG='dataproducts/deploy-tag-20170126-162242'
+export GIT_TAG='dataproducts/deploy-tag-20170427-160803'
 
 export PATH=$PATH:/usr/local/cassandra/bin
 export PATH=$PATH:/usr/local/elasticsearch/bin
@@ -92,9 +93,8 @@ export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
-export NVM_DIR="$HOME/.nvm"
-source "/usr/local/opt/nvm/nvm.sh"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(rbenv init -)"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
-
-#export PATH=/opt/twitter/rvm/bin:$PATH
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="$HOME/.yarn/bin:$PATH"

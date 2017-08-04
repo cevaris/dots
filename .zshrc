@@ -83,7 +83,7 @@ alias updatedb='/usr/libexec/locate.updatedb'
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
-export GIT_TAG='dataproducts/deploy-tag-20170427-160803'
+export GIT_TAG='dataproducts/deploy-tag-20170727-152501'
 
 export PATH=$PATH:/usr/local/cassandra/bin
 export PATH=$PATH:/usr/local/elasticsearch/bin

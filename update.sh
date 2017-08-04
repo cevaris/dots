@@ -7,6 +7,7 @@ ARRAY=(
     .ctags
     .githelpers
     .gitignore_global
+    .qwerty.txt
     .tmux.conf
     .zshrc
     .zshfuncs

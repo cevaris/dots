@@ -7,5 +7,4 @@
 [kp-lctrl]>[kp-lwin]
 [rctrl]>[lalt]
 [kp-rctrl]>[kp-rwin]
-[rwin]>[rctrl]
 [kp-rwin]>[kp-rctrl]

@@ -84,6 +84,14 @@ function removeFromPath() {
 }
 #setjdk 1.8
 
+function jpid() {
+    if [ -z "$1" ]; then
+	print Missing java process name
+	return 1
+    fi
+    jps | grep $1 | cut -d' ' -f1
+}
+
 # General Path Helper
 function pathAdd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -197,6 +205,32 @@ func gitignore() {
 
 # JVX
 function jvx() { jvis $1:36001 ;}
+
+function ffmpeg-scale() {
+    if hash ffmpeg 2>/dev/null; then
+	_FS_SOURCE=$1
+	_FS_PREFIX=$2
+	_FS_SCALE=$3
+
+	if [ -z "$1" ]; then
+	    echo 'Missing image source.'
+	    return 1
+	fi
+	if [ -z "$2" ]; then
+	    echo 'Missing image prefix.'
+	    return 1
+	fi
+	if [ -z "$1" ]; then
+	    echo 'Missing scale size (pixles).'
+	    return 1
+	fi
+
+	ffmpeg -i $_FS_SOURCE -vf scale=$_FS_SCALE:$_FS_SCALE $_FS_PREFIX-$_FS_SCALE.png
+    else
+	echo 'ffmpeg not installed.'
+	return 1
+    fi
+}
 
 function removeKnownHost() {
     TO_BE_REMOVED=$1

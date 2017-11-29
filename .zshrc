@@ -74,6 +74,7 @@ alias py.test'py.test -s'
 alias rake='noglob rake'
 alias r='reload'
 alias rm='rm -i'
+
 alias ssh='TERM=xterm ssh'
 alias timeout=gtimeout
 alias tmux'TERM=xterm-256color tmux'
@@ -83,7 +84,7 @@ alias updatedb='/usr/libexec/locate.updatedb'
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
-export GIT_TAG='dataproducts/deploy-tag-20170727-152501'
+export GIT_TAG='dataproducts/deploy-tag-20170925-150605'
 
 export PATH=$PATH:/usr/local/cassandra/bin
 export PATH=$PATH:/usr/local/elasticsearch/bin
@@ -92,9 +93,10 @@ export PATH=$PATH:/usr/local/kafka/bin
 export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(rbenv init -)"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.fastlane/bin:$PATH"

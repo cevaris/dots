@@ -6,6 +6,7 @@ ARRAY=(
     .emacs
     .ctags
     .githelpers
+    .gitconfig
     .gitignore_global
     .qwerty.txt
     .tmux.conf

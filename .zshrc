@@ -85,6 +85,7 @@ alias updatedb='/usr/libexec/locate.updatedb'
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
 export GIT_TAG='dataproducts/deploy-tag-20170925-150605'
+export EE_PANTS_DAEMON_BETA=0
 
 export PATH=$PATH:/usr/local/cassandra/bin
 export PATH=$PATH:/usr/local/elasticsearch/bin

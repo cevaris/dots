@@ -263,3 +263,6 @@ function rword(){
 
 cdw() { cd ~/workspace/${@}; }
 compctl -/ -W ~/workspace cdw
+
+cdg() { cd /git/${@}; }
+compctl -/ -W /git cdg

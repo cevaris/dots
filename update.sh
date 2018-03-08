@@ -9,6 +9,7 @@ ARRAY=(
     .gitconfig
     .gitignore_global
     .qwerty.txt
+    .spacemacs
     .tmux.conf
     .zshrc
     .zshfuncs

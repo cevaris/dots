@@ -3,8 +3,8 @@
 set -x
 ARRAY=(
     .amethyst
-    .emacs
-    .ctags
+#    .emacs
+#    .ctags
     .githelpers
     .gitconfig
     .gitignore_global

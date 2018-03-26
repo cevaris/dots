@@ -8,7 +8,7 @@
 [credential]
 	helper = osxkeychain
 [core]
-	excludesfile = /Users/adamc/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [user]
 	name = Adam Cardenas
 	email = cevaris@gmail.com

@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     go
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -42,15 +43,15 @@ values."
      emacs-lisp
      ;; git
      ;; ivy
+     javascript
      ;; markdown
      ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     python
      scala
      ;; spell-checking
      ;; syntax-checking
      version-control
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -128,10 +129,12 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(leuven
+                         afternoon
+                         spacemacs-dark
                          spacemacs-light
                          default
-                         afternoon)
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -314,38 +317,49 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (defun copy-to-clipboard ()
-    "Copies selection to x-clipboard."
-    (interactive)
-    (if (display-graphic-p)
-        (progn
-          (message "Yanked region to x-clipboard!")
-          (call-interactively 'clipboard-kill-ring-save)
-          )
-      (if (region-active-p)
-          (progn
-            (shell-command-on-region (region-beginning) (region-end) "pbcopy")
-            (message "Yanked region to clipboard!")
-            (deactivate-mark))
-        (message "No region active; can't yank to clipboard!")))
-    )
-
-  (defun paste-from-clipboard ()
-    "Pastes from x-clipboard."
-    (interactive)
-    (if (display-graphic-p)
-        (progn
-          (clipboard-yank)
-          (message "graphics active")
-          )
-      (insert (shell-command-to-string "pbpaste"))
-      )
-    )
-
-  (global-set-key (kbd "M-w") 'copy-to-clipboard)
-  (global-set-key (kbd "C-y") 'paste-from-clipboard)
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'alien)
 
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (leuven)))
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-color "#14151E" t)
+ '(package-selected-packages
+   (quote
+    (yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic go-guru go-eldoc go-mode helm-themes helm-swoop helm-projectile helm-mode-manager helm-flx helm-descbinds helm-ag ace-jump-helm-line afternoon-theme yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file noflet neotree move-text macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio git-gutter-fringe git-gutter-fringe+ flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu ensime elisp-slime-nav dumb-jump diminish diff-hl define-word counsel-projectile column-enforce-mode coffee-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#d54e53")
+     (40 . "goldenrod")
+     (60 . "#e7c547")
+     (80 . "DarkOliveGreen3")
+     (100 . "#70c0b1")
+     (120 . "DeepSkyBlue1")
+     (140 . "#c397d8")
+     (160 . "#d54e53")
+     (180 . "goldenrod")
+     (200 . "#e7c547")
+     (220 . "DarkOliveGreen3")
+     (240 . "#70c0b1")
+     (260 . "DeepSkyBlue1")
+     (280 . "#c397d8")
+     (300 . "#d54e53")
+     (320 . "goldenrod")
+     (340 . "#e7c547")
+     (360 . "DarkOliveGreen3"))))
+ '(vc-annotate-very-old-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

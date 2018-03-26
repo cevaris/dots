@@ -206,6 +206,16 @@ func gitignore() {
 # JVX
 function jvx() { jvis $1:36001 ;}
 
+function em(){
+    # Checks if there's a frame open
+    emacsclient -n -e "(if (> (length (frame-list)) 1) ''t)" 2> /dev/null | grep t &> /dev/null
+    if [ "$?" -eq "1" ]; then
+        emacsclient -a '' -nqc "$@" &> /dev/null
+    else
+        emacsclient -nq "$@" &> /dev/null
+    fi
+}
+
 function ffmpeg-scale() {
     if hash ffmpeg 2>/dev/null; then
 	_FS_SOURCE=$1

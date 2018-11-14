@@ -50,13 +50,13 @@ function precmd {
 
 ############################################################
 # Aliases
-alias arc='arc --trace'
+# alias arc='arc --trace'
 alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
-alias dots='emacs -nw /git/dots/'
+alias dots='emacs /git/dots/'
 alias emacs='em'
-alias emacs-ui='/Applications/Emacs.app/Contents/MacOS/Emacs &'
+#alias emacs-ui='/Applications/Emacs.app/Contents/MacOS/Emacs &'
 alias fab='fab --show=debug'
 alias fmt80='pbpaste | fmt -w 80 | pbcopy'
 #alias gci='git ci -am'
@@ -65,7 +65,6 @@ alias fmt80='pbpaste | fmt -w 80 | pbcopy'
 alias hd='hexdump -C'
 alias jvis="jvisualvm --openjmx"
 alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
-alias less='less -N'
 alias ll='ls -la'
 alias m='man'
 alias mci='mvn clean compile  -Denforcer.skip=true'
@@ -95,10 +94,21 @@ export PATH=$PATH:/usr/local/kafka/bin
 export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
-export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bine
+export PATH=$PATH:/go/bin
+export PATH=$PATH:$HOME/Library/Python/2.7/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(rbenv init -)"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/.fastlane/bin:$PATH"
+export LESS="--RAW-CONTROL-CHARS -N"
+
+export LC_ALL="en_US.UTF-8"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc'; fi

@@ -8,3 +8,6 @@
 *#
 
 .projectile
+
+**/.idea/
+*.iml

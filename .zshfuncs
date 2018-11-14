@@ -82,7 +82,7 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-#setjdk 1.8
+setjdk 1.8
 
 function jpid() {
     if [ -z "$1" ]; then
@@ -107,10 +107,20 @@ export PIP_RESPECT_VIRTUALENV=true
 #source $(which virtualenvwrapper.sh)
 
 # Go dev
-alias goplay='cd /go/src/github.com/cevaris'
+# alias goplay='cd /go/src/github.com/cevaris'
 export GOPATH=/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN/bin:$PATH
+
+# function goplay(){
+#     set -x
+#     # Go dev
+#     GODIR=${1:-$(pwd)} 
+#     export GOPATH=$GODIR
+#     export GOBIN=$GODIR/bin
+#     set +x
+#     export PATH=$GOBIN/bin:$PATH
+# }
 
 function docker-ip() {
     boot2docker ip 2> /dev/null
@@ -200,11 +210,13 @@ func kill-port() {
 
 # gitignore
 func gitignore() {
-    curl https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
+    curl -s  https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
 }
 
 # JVX
 function jvx() { jvis $1:36001 ;}
+
+function diff-link() { open "http://go/code/$1"; }
 
 function em(){
     # Checks if there's a frame open

@@ -108,19 +108,17 @@ export PIP_RESPECT_VIRTUALENV=true
 
 # Go dev
 # alias goplay='cd /go/src/github.com/cevaris'
-export GOPATH=/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN/bin:$PATH
+#export GOPATH=/go
+#export GOBIN=$GOPATH/bin
+#export PATH=$GOBIN/bin:$PATH
 
-# function goplay(){
-#     set -x
-#     # Go dev
-#     GODIR=${1:-$(pwd)} 
-#     export GOPATH=$GODIR
-#     export GOBIN=$GODIR/bin
-#     set +x
-#     export PATH=$GOBIN/bin:$PATH
-# }
+function goplay(){
+    DIR=${1:-$(pwd)}
+    cd $DIR
+    export GOPATH=$DIR
+    export GOBIN=${GOPATH}/bin
+    export PATH=${GOBIN}/bin:${PATH}
+}
 
 function docker-ip() {
     boot2docker ip 2> /dev/null
@@ -281,6 +279,10 @@ function rword(){
     lines=$(cat $WORDFILE  | wc -l);
     rnum=$((RANDOM*RANDOM%$lines+1));
     sed -n "$rnum p" $WORDFILE
+}
+
+function repeat-until-failure(){
+    while $@; do :; done
 }
 
 cdw() { cd ~/workspace/${@}; }

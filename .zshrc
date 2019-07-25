@@ -13,6 +13,14 @@ autoload -U colors && colors
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
+# Git prompt
+autoload -U promptinit; promptinit
+PURE_CMD_MAX_EXEC_TIME=1
+PURE_PROMPT_SYMBOL="%{$fg[red]%}~%{$fg[white]%}࿔%{$reset_color%}"
+PURE_GIT_PULL=0
+PURE_GIT_UNTRACKED_DIRTY=0 
+prompt pure
+
 # Delete key
 bindkey "^[[3~"  delete-char
 bindkey "^[3;5~" delete-char
@@ -39,14 +47,18 @@ setopt chase_dots
 setopt extendedglob
 setopt share_history
 
-function precmd {
-    source /opt/twitter/opt/git/etc/bash_completion.d/git-prompt.sh
-    if [[ $(__git_ps1 "%s") = *[!\ ]* ]]; then
-	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(__git_ps1 "%s")%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    else
-	PROMPT="%{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-    fi
-}
+# function precmd {
+#     source /opt/twitter/opt/git/etc/bash_completion.d/git-prompt.sh
+#     if [[ $(__git_ps1 "%s") = *[!\ ]* ]]; then
+# 	PROMPT="%{$fg[green]%}%c (%{$fg_bold[magenta]%}$(__git_ps1 "%s")%{$fg[green]%}) %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+#     else
+# 	PROMPT="%{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+#     fi
+# }
+# function precmd {
+#     PROMPT="%{$fg_bold[magenta]%}$(date "+%H:%M:%S") ❯  %{$reset_color%}"
+# }
+
 
 ############################################################
 # Aliases
@@ -84,7 +96,6 @@ alias updatedb='/usr/libexec/locate.updatedb'
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
-export GIT_TAG='dataproducts/deploy-tag-20170925-150605'
 export EE_PANTS_DAEMON_BETA=0
 
 export PATH=$PATH:/usr/local/cassandra/bin
@@ -95,8 +106,13 @@ export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bine
-export PATH=$PATH:/go/bin
+#export PATH=$PATH:/go/bin
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
+
+export GOPATH=/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN/bin:$PATH
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(rbenv init -)"
@@ -106,6 +122,17 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 export LESS="--RAW-CONTROL-CHARS -N"
 
 export LC_ALL="en_US.UTF-8"
+
+# android dev
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
+export ANDROID_EMULATOR_HOME=$HOME/.android
+export ANDROID_AVD_HOME=$HOME/.android/avd
+export PATH=${PATH}:$HOME/Library/Android/sdk/platform-tools
+export PATH=${PATH}:$HOME/Library/Android/sdk/tools
+export PATH=${PATH}:$HOME/Library/Android/sdk/tools/bin
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc'; fi

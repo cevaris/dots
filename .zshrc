@@ -66,7 +66,7 @@ setopt share_history
 alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
-alias dots='emacs /git/dots/'
+alias dots="emacs $HOME/git/dots/"
 alias emacs='em'
 #alias emacs-ui='/Applications/Emacs.app/Contents/MacOS/Emacs &'
 alias fab='fab --show=debug'
@@ -91,10 +91,12 @@ alias ssh='TERM=xterm ssh'
 alias timeout=gtimeout
 alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
+alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)\""
 ############################################################
 
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
+[[ -s ${HOME}/workspace/tweetypie-sandbox/dotfiles/.profile ]] && source ${HOME}/workspace/tweetypie-sandbox/dotfiles/.profile
 
 export EE_PANTS_DAEMON_BETA=0
 
@@ -139,3 +141,9 @@ if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/U
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

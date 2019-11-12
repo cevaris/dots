@@ -16,5 +16,5 @@ ARRAY=(
 )
 
 for i in "${ARRAY[@]}"; do
-    ln -sf /git/dots/$i /Users/$USER/$i
+    ln -sf /Users/$USER/git/dots/$i /Users/$USER/$i
 done

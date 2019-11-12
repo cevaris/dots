@@ -99,6 +99,10 @@ function pathAdd() {
     fi
 }
 
+function google() {
+    open "https://www.google.com/search?q=$1"
+}
+
 # Python virtualenv
 export WORKON_HOME=~/.envs
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
@@ -288,5 +292,5 @@ function repeat-until-failure(){
 cdw() { cd ~/workspace/${@}; }
 compctl -/ -W ~/workspace cdw
 
-cdg() { cd /git/${@}; }
-compctl -/ -W /git cdg
+cdg() { cd ${HOME}/git/${@}; }
+compctl -/ -W ${HOME}/git cdg

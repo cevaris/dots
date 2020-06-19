@@ -66,7 +66,7 @@ setopt share_history
 alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
-alias dots="emacs $HOME/git/dots/"
+alias dots="code $HOME/git/dots/"
 alias emacs='em'
 #alias emacs-ui='/Applications/Emacs.app/Contents/MacOS/Emacs &'
 alias fab='fab --show=debug'

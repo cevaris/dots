@@ -98,6 +98,7 @@ alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 [[ -s ${HOME}/workspace/tweetypie-sandbox/dotfiles/.profile ]] && source ${HOME}/workspace/tweetypie-sandbox/dotfiles/.profile
 
+
 export EE_PANTS_DAEMON_BETA=0
 
 export PATH=$PATH:/usr/local/cassandra/bin
@@ -109,7 +110,7 @@ export PATH=$PATH:/usr/local/zookeeper/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bine
 #export PATH=$PATH:/go/bin
-export PATH=$PATH:$HOME/Library/Python/2.7/bin
+#export PATH=$PATH:$HOME/Library/Python/2.7/bin
 
 export GOPATH=/go
 export GOBIN=$GOPATH/bin
@@ -147,3 +148,7 @@ if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

@@ -5,6 +5,6 @@
 [kp=]>[kp=mac]
 [lctrl]>[lwin]
 [kp-lctrl]>[kp-lwin]
-[rctrl]>[lalt]
+[rctrl]>[ralt]
 [kp-rctrl]>[kp-rwin]
 [kp-rwin]>[kp-rctrl]

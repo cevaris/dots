@@ -3,13 +3,10 @@
 set -x
 ARRAY=(
     .amethyst
-#    .emacs
-#    .ctags
     .githelpers
     .gitconfig
     .gitignore_global
     .qwerty.txt
-    .spacemacs
     .tmux.conf
     .zshrc
     .zshfuncs

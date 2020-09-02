@@ -67,8 +67,6 @@ alias ag='ag --pager="less -XFR"'
 alias compose='docker-compose'
 alias csv='column -s, -t -x'
 alias dots="code $HOME/git/dots/"
-alias emacs='em'
-#alias emacs-ui='/Applications/Emacs.app/Contents/MacOS/Emacs &'
 alias fab='fab --show=debug'
 alias fmt80='pbpaste | fmt -w 80 | pbcopy'
 #alias gci='git ci -am'

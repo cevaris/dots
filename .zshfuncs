@@ -50,11 +50,6 @@ lexicaldate-min() {
     date -u +"%Y%m%d%H%M"
 }
 
-ctags-emacs() {
-    ctags -e -R .
-    print Done indexing $(pwd)
-}
-
 ctags-python() {
     PYTHON_VENV=${$(which python)/\/bin\/python/}
     ctags -e -R . $PYTHON_VENV
@@ -219,16 +214,6 @@ func gitignore() {
 function jvx() { jvis $1:36001 ;}
 
 function diff-link() { open "http://go/code/$1"; }
-
-function em(){
-    # Checks if there's a frame open
-    emacsclient -n -e "(if (> (length (frame-list)) 1) ''t)" 2> /dev/null | grep t &> /dev/null
-    if [ "$?" -eq "1" ]; then
-        emacsclient -a '' -nqc "$@" &> /dev/null
-    else
-        emacsclient -nq "$@" &> /dev/null
-    fi
-}
 
 function ffmpeg-scale() {
     if hash ffmpeg 2>/dev/null; then

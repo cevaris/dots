@@ -26,10 +26,10 @@ prompt pure
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 
-# Make emacs default git editor
-export GIT_EDITOR=emacs
-export EDITOR=emacs
-export VISUAL=emacs
+# Make VSCode default git editor
+export GIT_EDITOR=code
+export EDITOR=code
+export VISUAL=code
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
@@ -153,3 +153,6 @@ fi
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# python poetry
+export PATH="$HOME/.local/bin:$PATH"

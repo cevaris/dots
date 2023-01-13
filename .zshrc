@@ -102,4 +102,18 @@ fi
 
 # python poetry
 export PATH="$HOME/.local/bin:$PATH"
+
+# NVM
 export PATH="$HOME/.nvm/bin:$PATH"
+
+# pyenv
+export PATH="$HOME/.pyenv/shims:$PATH"
+eval "$(pyenv init -)"
+
+# rust
+PATH="$PATH:$HOME/.cargo/bin"
+
+# Configure OpenSSL for x86 on M1 for SQLite
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+export OPENSSL_ROOT=/usr/local/

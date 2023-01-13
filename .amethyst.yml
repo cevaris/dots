@@ -1,0 +1,15 @@
+layouts:
+    - tall
+    - wide
+    - fullscreen
+    - middle-wide
+    - bsp
+
+mod1:
+    - shift
+    - option
+
+mod2:
+    - control
+    - shift
+    - option

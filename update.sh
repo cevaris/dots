@@ -2,7 +2,7 @@
 
 set -x
 ARRAY=(
-    .amethyst
+    .amethyst.yml
     .githelpers
     .gitconfig
     .gitignore_global

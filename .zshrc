@@ -108,7 +108,8 @@ export PATH="$HOME/.nvm/bin:$PATH"
 
 # pyenv
 export PATH="$HOME/.pyenv/shims:$PATH"
-eval "$(pyenv init -)"
+[ -s "pyenv" ] && \. eval "$(pyenv init -)"
+
 
 # rust
 PATH="$PATH:$HOME/.cargo/bin"

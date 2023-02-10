@@ -277,5 +277,8 @@ function repeat-until-failure(){
 cdw() { cd ~/workspace/${@}; }
 compctl -/ -W ~/workspace cdw
 
+cds() { cd ~/src/${@}; }
+compctl -/ -W ~/src cds
+
 cdg() { cd ${HOME}/git/${@}; }
 compctl -/ -W ${HOME}/git cdg

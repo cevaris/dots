@@ -6,7 +6,7 @@ export ZSH=/Users/$USER/.oh-my-zsh/
 source $ZSH/oh-my-zsh.sh
 
 # completion
-plugins=(git-prompt)
+plugins=()
 
 # Colors
 autoload -U colors && colors
@@ -39,9 +39,9 @@ setopt chase_dots
 setopt extendedglob
 setopt share_history
 
-function precmd {
-    PROMPT="$(date "+%H:%M:%S") %{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
-}
+# function precmd {
+#     PROMPT="$(date "+%H:%M:%S") %{$fg[green]%}%c %{$fg[red]%}~%{$fg[white]%}࿔ %{$reset_color%}"
+# }
 
 ############################################################
 # Aliases
@@ -75,6 +75,25 @@ alias tmux'TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)\""
 ############################################################
+
+# https://eendroroy.github.io/alien/
+source ~/src/zsh-alien/alien.zsh
+# export ALIEN_USE_NERD_FONT=1
+export ALIEN_THEME="soft"
+export ALIEN_SECTION_TIME_FORMAT=%H:%M:%S
+export ALIEN_SECTIONS_LEFT=(
+  exit
+  time
+  user
+  path
+  vcs_branch:async
+  # vcs_status:async
+  # vcs_dirty:async
+  newline
+  # ssh
+  # venv
+  prompt
+)
 
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile

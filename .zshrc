@@ -45,38 +45,25 @@ setopt share_history
 
 ############################################################
 # Aliases
-# alias arc='arc --trace'
 alias ag='ag --pager="less -XFR"'
-alias compose='docker-compose'
 alias csv='column -s, -t -x'
 alias dots="code $HOME/git/dots/"
 alias emacs="emacs -nw"
-alias fab='fab --show=debug'
 alias fmt80='pbpaste | fmt -w 80 | pbcopy'
-#alias gci='git ci -am'
-#alias gm='git co master && git pull origin master'
-#alias gpom='git push origin master'
 alias hd='hexdump -C'
-alias jvis="jvisualvm --openjmx"
-alias jvisualvm="/Applications/VisualVM.app/Contents/MacOS/visualvm"
 alias ll='ls -la'
-alias m='man'
-alias mci='mvn clean compile  -Denforcer.skip=true'
-#alias pants='./pants'
 alias pbsort='pbpaste | sort | uniq | pbcopy'
-alias py.test'py.test -s'
-alias rake='noglob rake'
 alias r='reload'
 alias rm='rm -i'
 
 alias ssh='TERM=xterm ssh'
 alias timeout=gtimeout
-alias tmux'TERM=xterm-256color tmux'
+alias tmux='TERM=xterm-256color tmux'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)\""
 ############################################################
 
-if [ -f /Users/acardenas/.tnsrc ]; then
+if [ -f ~/git/zsh-alien/alien.zsh ]; then
   # https://eendroroy.github.io/alien/
   source ~/git/zsh-alien/alien.zsh
   export ALIEN_GIT_SYM=''

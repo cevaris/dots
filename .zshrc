@@ -78,7 +78,8 @@ alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)
 
 # https://eendroroy.github.io/alien/
 source ~/git/zsh-alien/alien.zsh
-# export ALIEN_USE_NERD_FONT=1
+export ALIEN_GIT_SYM=''
+export ALIEN_BRANCH_SYM=''
 export ALIEN_THEME="soft"
 export ALIEN_SECTION_TIME_FORMAT=%H:%M:%S
 export ALIEN_SECTIONS_LEFT=(
@@ -103,12 +104,6 @@ export PATH="$PATH:/opt/homebrew/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LC_ALL="en_US.UTF-8"
-
-# The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-# if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
 
 ###-tns-completion-start-###
 if [ -f /Users/acardenas/.tnsrc ]; then

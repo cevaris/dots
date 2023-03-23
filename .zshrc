@@ -110,11 +110,6 @@ export LC_ALL="en_US.UTF-8"
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/acardenas/usr/local/google-cloud-sdk/completion.zsh.inc'; fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
 ###-tns-completion-start-###
 if [ -f /Users/acardenas/.tnsrc ]; then
   source /Users/acardenas/.tnsrc
@@ -125,21 +120,11 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 # NVM
-export PATH="$HOME/.nvm/bin:$PATH"
-
-# pyenv
-export PATH="$HOME/.pyenv/shims:$PATH"
-[ -s "pyenv" ] && \. eval "$(pyenv init -)"
-
-# rust
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Configure OpenSSL for x86 on M1 for SQLite
-export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
-export OPENSSL_ROOT=/usr/local/
-
-# WIP Load .nvmrc files automatically
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# Load .nvmrc files automatically
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -161,12 +146,22 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# pyenv
+export PATH="$HOME/.pyenv/shims:$PATH"
+[ -s "pyenv" ] && \. eval "$(pyenv init -)"
+
+# rust
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# Configure OpenSSL for x86 on M1 for SQLite
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+export OPENSSL_ROOT=/usr/local/
+
 # ruby
 export PATH="$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init - zsh)"
 
-=======
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
->>>>>>> Stashed changes

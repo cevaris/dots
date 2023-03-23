@@ -76,25 +76,27 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias vnc="echo \"vnc://$(ifconfig | grep "inet 172" | head -n1 | cut -d' ' -f2)\""
 ############################################################
 
-# https://eendroroy.github.io/alien/
-source ~/git/zsh-alien/alien.zsh
-export ALIEN_GIT_SYM=''
-export ALIEN_BRANCH_SYM=''
-export ALIEN_THEME="soft"
-export ALIEN_SECTION_TIME_FORMAT=%H:%M:%S
-export ALIEN_SECTIONS_LEFT=(
-  exit
-  time
-  user
-  path
-  vcs_branch:async
-  # vcs_status:async
-  # vcs_dirty:async
-  newline
-  # ssh
-  # venv
-  prompt
-)
+if [ -f /Users/acardenas/.tnsrc ]; then
+  # https://eendroroy.github.io/alien/
+  source ~/git/zsh-alien/alien.zsh
+  export ALIEN_GIT_SYM=''
+  export ALIEN_BRANCH_SYM=''
+  export ALIEN_THEME="soft"
+  export ALIEN_SECTION_TIME_FORMAT=%H:%M:%S
+  export ALIEN_SECTIONS_LEFT=(
+    exit
+    time
+    user
+    path
+    vcs_branch:async
+    # vcs_status:async
+    # vcs_dirty:async
+    newline
+    # ssh
+    # venv
+    prompt
+  )
+fi
 
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile

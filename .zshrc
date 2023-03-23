@@ -98,6 +98,8 @@ export ALIEN_SECTIONS_LEFT=(
 [[ -s ${HOME}/.zshfuncs ]] && source ${HOME}/.zshfuncs # &>/dev/null
 [[ -s ${HOME}/.profile ]] && source ${HOME}/.profile
 
+export PATH="$PATH:/opt/homebrew/bin"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LC_ALL="en_US.UTF-8"
@@ -129,9 +131,8 @@ export PATH="$HOME/.nvm/bin:$PATH"
 export PATH="$HOME/.pyenv/shims:$PATH"
 [ -s "pyenv" ] && \. eval "$(pyenv init -)"
 
-
 # rust
-PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Configure OpenSSL for x86 on M1 for SQLite
 export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
@@ -164,3 +165,8 @@ load-nvmrc
 export PATH="$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init - zsh)"
 
+=======
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+>>>>>>> Stashed changes

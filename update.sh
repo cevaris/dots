@@ -3,11 +3,11 @@
 set -x
 ARRAY=(
     .amethyst.yml
-    .githelpers
+    # .githelpers
     .gitconfig
     .gitignore_global
-    .qwerty.txt
-    .tmux.conf
+    # .qwerty.txt
+    # .tmux.conf
     .zshrc
     .zshfuncs
 )

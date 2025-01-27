@@ -21,9 +21,23 @@ bindkey "^[3;5~" delete-char
 export GIT_EDITOR=code
 export EDITOR=code
 export VISUAL=code
+
+# History
 export HISTSIZE=100000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
+setopt APPEND_HISTORY             # Write to history
+setopt HIST_EXPIRE_DUPS_FIRST     # Expire duplicate entries first when trimming history.
+setopt HIST_FIND_NO_DUPS          # Do not display a line previously found.
+setopt HIST_IGNORE_ALL_DUPS       # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_IGNORE_DUPS           # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_SPACE          # Don't record an entry starting with a space.
+setopt HIST_NO_STORE              # Don't store history commands
+setopt HIST_REDUCE_BLANKS         # Remove superfluous blanks before recording entry.
+setopt HIST_SAVE_NO_DUPS          # Older duplicates are omitted.
+setopt INC_APPEND_HISTORY         # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY              # Share history between all sessions.
+SHELL_SESSION_HISTORY=0           # Disable pert-terminal-session
 
 export COMPLETION_WAITING_DOTS="true"
 
@@ -148,4 +162,4 @@ export OPENSSL_ROOT=/usr/local/
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

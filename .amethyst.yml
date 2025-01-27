@@ -5,11 +5,8 @@ layouts:
     - middle-wide
     - bsp
 
-mod1:
-    - shift
-    - option
-
-mod2:
-    - control
-    - shift
-    - option
+# Select column layout (override)
+# assignng to some random key to override the default (SHIFT + OPTION + F)
+select-column-layout:
+  mod: mod1
+  key: 9
